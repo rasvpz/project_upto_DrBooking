@@ -1,0 +1,26 @@
+{
+  "name": "projectpractice",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www -e hbs,js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "bson-objectid": "^2.0.2",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^12.0.4",
+    "express": "~4.16.1",
+    "express-handlebars": "^6.0.2",
+    "express-validator": "^6.14.0",
+    "hbs": "^4.2.0",
+    "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongo-db": "^1.0.2",
+    "morgan": "~1.9.1",
+    "objectid": "^3.2.1",
+    "satelize": "^0.1.2"
+  }
+}

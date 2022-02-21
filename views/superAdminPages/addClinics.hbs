@@ -1,0 +1,31 @@
+		<form action="/superAdmin/addClinic" method="POST">
+        			<select name="pachayath">
+					   <option name="" value="">Select Panchayaths</option>
+						<option name="Koppam" value="Koppam">Koppam</option>
+						<option name="Kulukkallur" value="Kulukkallur">Kulukkallur</option>
+						<option name="Muthuthala" value="Muthuthala">Muthuthala</option>
+						<option name="Ongallur" value="Ongallur">Ongallur</option>
+						<option name="Pattambi" value="Pattambi">Pattambi</option>
+						<option name="Thiruvegapura" value="Thiruvegapura">Thiruvegapura</option>
+						<option name="Vallapuzha" value="Vallapuzha">Vallapuzha</option>
+                        <option name="Vilayur  " value="Vilayur  ">Vilayur  </option>
+					</select> <br>     			
+                        <input type="text" name="clinicName" placeholder="clinicName"><br>
+                        <input type="text" name="place"  placeholder="place"><br>
+                        <input type="text" name="contacts"  placeholder="contacts"><br>
+                        <input type="text" name="emails"  placeholder="emails"><br>
+                        <input type="text" name="latitude"  placeholder="latitude"><br>
+                        <input type="text" name="longitude"  placeholder="longitude"><br>
+                        <input type="text" name="paymentMode"  placeholder="paymentMode"><br>	<br>			
+		<input type="submit" value="ADD">&nbsp;&nbsp;&nbsp; <a href="/superAdmin" type="button">Close</button><br>	<br>
+        </form>
+		<table>
+			{{#each result}}
+			<tr>
+				<td>{{this.myClinicId}}</td>
+				 <td>{{this.clinicName}}</td>
+				 <td><a onclick="return confirm('Are you sure, you want to delete it?')" href="/superAdmin/deleteClinic/{{this._id}}">delete</a></td>
+				<td><a href="/superAdmin/editClinic/{{this._id}}">EDIT</a></td>
+			</tr>
+			{{/each}}
+		</table>

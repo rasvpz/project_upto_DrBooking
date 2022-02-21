@@ -1,0 +1,45 @@
+<footer style="margin-top: 37px !important; position: fixed; left: 0; bottom: 0; width:100%">
+	<div class="dropup">
+		<button class="dropbtn">
+			<i class="fab fa-windows" style="font-size:24px"><span class="usr">&nbsp;&nbsp; {{this.name}}</span></i>
+		</button>
+		<div class="dropup-content">
+			<a href="#">Link 1</a>
+			<a href="#">Link 2</a>
+			<a href="#">Link 3</a>
+		</div>
+	</div>
+	<span style="color: grey; font-size:larger; font-size:24px;"> &nbsp;&nbsp;|</span>
+	<i class="fas fa-search" style="font-size:20px; margin-left:16px;"></i>
+	<i class="fas fa-list-ol" style="font-size:20px; margin-left:12px;"></i>
+	
+	<i class="fas fa-capsules" style="font-size:22px; margin-left:12px;"></i>
+	<span style="margin-left:18px; margin-top:-8px; color:rgb(255, 255, 255); font-size:24px">0</span><i class="fas fa-shopping-basket" style="font-size:22px; padding:2px; margin-left:-20px"></i>
+	<i class="fas fa-video" style="font-size:22px; margin-left:12px;"></i>
+	<span style="color: grey; font-size:larger; font-size:24px;"> &nbsp;&nbsp;|</span>
+	<span id="minBtn" style="color: grey; font-size:larger; font-size:18px;"><button onclick="myFunction()" type="button" class="btn btn-primary btn-sm"><i class="fas fa-map-marker-alt" style="font-size:14px;"></i></button></span>
+	
+	<span id="time" class="time" style="float: right; padding:8px; font-weight:regular"> </span>
+</footer>
+
+
+
+
+<script>
+	setInterval(myFunction, 1000);
+
+	function myFunction() {
+		let d = new Date();
+		document.getElementById("time").innerHTML =
+			d.getHours() + ":" +
+			d.getMinutes() + ":" +
+			d.getSeconds();
+	}
+</script>
+<script>
+function myFunction() {
+  document.getElementById("minBtn").style.display = "none";
+  document.getElementById("locationHide").style.display = "block";
+}
+</script>
+

@@ -1,0 +1,51 @@
+{{!-- {{#each result}}
+<a href=""> {{this.district}} </a><br>
+{{/each}} --}}
+
+<h3>Super Admin</h3>
+
+<table width="100%">
+    <tr>
+        <td width="15%" style="border-right: 1px solid black;">
+                <h4>SETTINGS</h4>
+                <a href="superAdmin/addDistricts">Add Districts</a><br>
+                <a href="superAdmin/fetchDistForMuncipalites">Add Muncipalitiy</a><br>
+                <a href="superAdmin/fetchPanchayaths">Add Panchayaths</a><br>
+                <a href="superAdmin/addClinics">Clinic Registration </a><br>
+                <a href="superAdmin/fetchAllClinics">Clinic Contacts </a><br>
+                <a href="superAdmin/blockedClinics">Block Clinic </a>
+                
+                <h4>ACCOUNTS</h4>
+                <a href="#">Dailry Reports</a><br>
+                <a href="#">Monthly Reports</a><br>
+                <a href="#">Add Expenses</a><br>
+
+                <h4>SUPPORTS</h4>
+                <a href="#">Technical</a><br>
+                <a href="#">Marketting</a><br>
+                <a href="#">Doctors Posting</a><br>
+        </td>
+
+            <td valign="top" width="85%">
+                <table width="100%">
+                    <tr>
+                        <td width="15" valign="top">&nbsp;&nbsp; <b>{{totalDistricts}}</b> Districts<br><br></td>
+                        <td width="15" valign="top">  <b>{{totalMuncipality}}</b> Munipalities</td>
+                        <td width="15" valign="top"> <b>{{totalPanchayaths}}</b> Panchayaths</td>
+                        <td width="15" valign="top"> <b>{{totalPanchayaths}}</b> Clinics</td>
+                        <td width="15" valign="top"> <b>{{totalPending}}</b> Pending Payments</td>
+                    </tr>
+
+                        <tr >
+                            <td width="20 %" valign="top">&nbsp;&nbsp; <b>{{totalDistricts}}000</b> Daily Income</td>
+                            <td width="20 %" valign="top">  <b>{{totalMuncipality}}0000</b> Monthly Income</td>
+                            <td width="20 %" valign="top"> <b>{{totalPanchayaths}}0000</b>Expenses</td>
+                            <td width="20 %" valign="top"> <b>{{totalPanchayaths}}8778</b> P/L</td>
+                            <td width="20 %" valign="top"> <b>{{totalPending}}76767</b>Online Payments</td>
+                        </tr>
+
+
+                </table>
+            </td>
+    </tr>
+</table>

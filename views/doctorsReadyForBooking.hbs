@@ -1,0 +1,32 @@
+<form>
+      {{!-- style="display: none;" --}}
+<h1>Doctors of {{newName}}</h1>
+{{!-- <input type="text" name="clinicName" value="{{newName}}">
+<input type="text" name="name" value="{{user.name}}"> --}}
+{{user.name}}
+{{user.address}}
+{{user.panchayath}}
+{{user.whatsapp}}
+
+{{#each result}}
+<table>
+    <tr>
+        <td>{{this.doctorName}} </td>
+    </tr>
+    <br><br>
+        <tr>
+        <td>{{this.department}}</td>
+    </tr>       
+     <tr>
+        <td>{{this.degreee}}</td>
+    </tr>
+     <tr>
+        <td>{{this.consultingTime}}</td>
+    </tr>
+         <tr>
+        <td> <a href="/bookings/{{this.doctorName}}/{{this.department}}/{{../newName}}/{{../user.name}}/{{../user.address}}/{{../user.panchayath}}/{{../user.whatsapp}}">BOOKING</a> </td>
+    </tr>
+</table>
+{{/each}}
+
+</form>

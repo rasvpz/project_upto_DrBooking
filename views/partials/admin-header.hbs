@@ -1,0 +1,26 @@
+<footer style="margin-top: 37px !important; position: fixed; left: 0; bottom: 0; width:100%">
+	<div class="dropup">
+		<button class="dropbtn">
+			<i class="fab fa-windows" style="font-size:24px"><span class="usr">&nbsp;&nbsp; ADMIN</span></i>
+		</button>
+		<div class="dropup-content">
+			<a href="#">Link 1</a>
+			<a href="#">Link 2</a>
+			<a href="#">Link 3</a>
+		</div>
+	</div>
+	<span id="time" style="float: right; padding:8px; font-weight:bold"></span>
+</footer>
+
+
+<script>
+	setInterval(myFunction, 1000);
+
+	function myFunction() {
+		let d = new Date();
+		document.getElementById("time").innerHTML =
+			d.getHours() + ":" +
+			d.getMinutes() + ":" +
+			d.getSeconds();
+	}
+</script>

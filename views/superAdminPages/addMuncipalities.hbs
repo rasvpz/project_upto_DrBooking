@@ -1,0 +1,99 @@
+		<form action="/superAdmin/addMuncipality" method="POST">  
+
+        			<select name="district" id="distValue" onchange="random_function()">
+					   <option name="" value="">Select District</option>
+					   {{#each dist}}
+						<option name="{{this.district}}" value="{{this.district}}">{{this.district}}</option>
+						{{/each}}
+						</select>      			
+
+
+					<select  name="muncipality" id="output" onchange="random_function1()">
+						<option value="">Select Muncipality</option>
+					</select>
+			
+		  <input type="submit" value="ADD">&nbsp;&nbsp;&nbsp;
+          <a href="/superAdmin" type="button">Close</button>
+        </form>
+		<table>
+			{{#each munc}}
+			<tr>
+				<td>{{this.myMuncipalityId}}</td> <td>{{this.muncipality}}</td>  <td><a onclick="return confirm('Are you sure, you want to delete it?')" href="/superAdmin/deleteMuncipalites/{{this._id}}">delete</a></td>
+			</tr>
+			{{/each}}
+		</table>
+<script>	
+
+function random_function()
+            {
+                 var district = document.getElementById("distValue").value;          
+                if(district=="Alappuzha")
+                {
+                    var arr=['Cherthala', 'Kuttanad', 'Karthikapally', 'Chengannur', 'Mavelikkara']
+                }
+                else if(district=="Ernakulam")
+                {
+                    var arr=['Aluva', 'Kunnathunadu', 'Kochi', 'Kanayannur', 'Kothamangalam', 'Muvattupuzha', 'Paravoor']
+                }
+
+                else if(district=="Idukki")
+                {
+                    var arr=['Devikulam', 'Udumbanchola', 'Thodupuzha', 'Peerumade', 'Idukki']
+                }
+
+                else if(district=="Kannur")
+                {
+                    var arr=['Thaliparambu', 'Kannur', 'Thalassery', 'Iritty', 'Payyannur']
+                }
+
+                else if(district=="Kasaragod")
+                {
+                    var arr=['Kasargod', 'Hosdurg', 'Vellarikkund', 'Manjeshwaram']
+                }
+
+                else if(district=="Kottayam")
+                {
+                    var arr=['Kottayam', 'Meenachil', 'Changanassery', 'Vaikom', 'Kanjirappally']
+                }
+
+                else if(district=="Kozhikode")
+                {
+                    var arr=['Kozhokkode', 'Koyilandi', 'Vadakara', 'Thamarassery']
+                }
+
+                else if(district=="Malappuram")
+                {
+                    var arr=['Eranad', 'Nilambur', 'Perinthalmanna', 'Tirur', 'Tirurangadi', 'Ponnani', 'Kondotty']
+                }
+
+                else if(district=="Palakkad")
+                {
+                    var arr=['alathur', 'Chittoor', 'Mannarkkad', 'Ottapalam', 'Palakkad', 'Pattambi']
+                }
+
+                else if(district=="Thiruvananthapuram")
+                {
+                    var arr=['Thiruvananthapuram', 'Nedumangadu', 'Chirayinkeezhu', 'Kattakada', 'Neyyattinkara', 'Varkala']
+                }
+
+                else if(district=="Thrissur")
+                {
+                    var arr=['Chavakkad', 'Kodungallur', 'Mugundapuram', 'Thalappally', 'Thrissur', 'Chalakkudy', 'Kunnamkulam']
+                } 
+
+
+                else if(district=="Wayanad")
+                {
+                    var arr=['Vythiri', 'Mananthavadi', 'Sulthan Bathery']
+                } 
+
+
+                var string="";
+             
+                for(i=0;i<arr.length;i++)
+                {
+                    string=string+"<option value="+arr[i]+">"+arr[i]+"</option>";
+                }
+                document.getElementById("output").innerHTML=string;
+            }
+</script>

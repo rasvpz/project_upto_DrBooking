@@ -1,0 +1,53 @@
+{{!-- {{#each result}}
+<a href=""> {{this.district}} </a><br>
+{{/each}} --}}
+
+<h3>Super Admin</h3>
+
+<table width="100%">
+    <tr>
+        <td width="15%" style="border-right: 1px solid black;">
+                <h4>SETTINGS</h4>
+                <a href="/superAdmin/addDistricts">Add Districts</a><br>
+                <a href="/superAdmin/addMuncipalites">Add Muncipalities</a><br>
+                <a href="/superAdmin/addPanchayaths">Add Panchayaths</a><br>
+                <a href="/superAdmin/addClinics">Clinic Registration </a><br>
+                <a href="/superAdmin/fetchAllClinics">Clinic Contacts </a><br>
+                <a href="/superAdmin/blockedClinics">Block Clinic </a>
+                
+                <h4>ACCOUNTS</h4>
+                <a href="#">Dailry Reports</a><br>
+                <a href="#">Monthly Reports</a><br>
+                <a href="#">Add Expenses</a><br>
+
+                <h4>SUPPORTS</h4>
+                <a href="#">Technical</a><br>
+                <a href="#">Marketting</a><br>
+                <a href="#">Doctors Posting</a><br>
+        </td>
+
+            <td valign="top" width="85%">
+                <table width="100%">
+                    <tr>
+                        <td width="15" valign="top">
+                            <table width="100%">
+                                {{#each response}}
+                                <tr>
+                                    <td>{{this.myClinicId}}</td>
+                                    <td>{{this.clinicName}}</td>
+                                    <td>{{this.pachayath}}</td>
+                                    <td>{{this.place}}</td>
+                                    <td>{{this.contacts}}</td>
+                                    <td>{{this.emails}}</td>                      
+                                    <td><a  href="/superAdmin/block/{{this.myClinicId}}">{{this.status}}</a></td>
+                                </tr>
+                                {{/each}}
+                            </table>
+                        </td>
+
+                    </tr>
+
+                </table>
+            </td>
+    </tr>
+</table>

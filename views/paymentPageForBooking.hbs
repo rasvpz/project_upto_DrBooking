@@ -1,0 +1,50 @@
+<h1>Please Confirm Your Booking</h1>
+
+
+
+<table width="50%">
+    <tr>
+        <td>
+            <table width="100%" border="0">
+                <tr bgcolor='#D9D9D6'>
+                    <td style="padding: 8px;" valign="top">TOKEN NO : SEND SOON</td>
+                    <td style="padding: 8px;" align="center"><h2>BOOKING SLIP</h2> <div style="margin-top: -20px;"> {{data.newName}}, {{data.panchayath}} </div></td>
+                    <td style="padding: 8px;" valign="top" align="right">DATE : {{data.bookingDate}}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table width="100%" bgcolor="#D9D9D6" border="1">
+                <tr>
+                    <td>
+                        <p>Doctor : {{data.doctorName}}</p>
+                        <p>Departmrnt : {{data.department}}</p>
+                        <p>Fees : {{data.fees}}</p>                    
+                    </td>
+                    <td>
+                        <p>Patient : {{data.name}}</p>
+                        <p>Address : {{data.address}}</p>
+                        <p>Place : {{data.panchayath}}</p>
+                        <p>Contact : {{data.whatsapp}}</p>          
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+                <td>
+            <table bgcolor='#D9D9D6' width="100%">
+                <tr>
+                    <td  style="padding-top: 8px;"> <h4> Consulting Time : {{data.consultingTime}} </h4></td>
+                    <td  style="padding-top: 8px;" align="right" valign="top"> <input type="button" value="CANCEL">&nbsp;&nbsp; <input type="submit" value="PAY ONLINE"> </td>
+                </tr>
+            </table>
+           </td>
+    </tr>
+        <tr>
+
+
+    </tr>
+</table>

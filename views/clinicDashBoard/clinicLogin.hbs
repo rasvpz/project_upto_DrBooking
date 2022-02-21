@@ -1,0 +1,69 @@
+<h2>Welcome to clinic Login Page</h2>
+<form method="POST" action="/clinicDashBoard/fetchSelectedClinicData">
+<table width="100%">
+    <tr>
+        <td width="20%">
+
+        </td>
+
+
+        <td width="20%">
+
+        </td>
+
+
+        <td width="20%" align="right">
+                    <select name="fetchClinic">
+                        {{#each fetchClinic}}
+					      <option value="{{this.clinicName}}">{{this.clinicName}}</option>
+                       {{/each}}
+					</select>
+        </td>
+
+
+        <td width="20%">
+
+        </td>
+
+
+        <td width="20%">
+
+        </td>
+    </tr>
+        <tr>
+        <td width="20%">
+
+        </td>
+
+
+        <td width="20%">
+
+        </td>
+
+
+        <td width="20%">
+            <h3>signUp</h3>
+            <input type="text" name="phoneNo" placeholder="Enter your registered no"><br><br>
+            <input type="text" name="password" placeholder="Enter your new password"><br><br>
+            <input type="submit" value="Resiter"> &nbsp;&nbsp; <input type="button" value="Close"><br><br>
+            </form>
+<hr>
+             <form method="POST" action="/clinicDashBoard/clinicAdminLogin">
+             <h3>Login</h3>
+            <input type="text" name="phoneNo" placeholder="Enter your registered no"><br><br>
+            <input type="text" name="password" placeholder="Enter your new password"><br><br>
+            <input type="submit" value="login"> &nbsp;&nbsp; <input type="button" value="Close">
+            </form>
+        </td>
+
+
+        <td width="20%">
+
+        </td>
+
+
+        <td width="20%">
+
+        </td>
+    </tr>
+</table>

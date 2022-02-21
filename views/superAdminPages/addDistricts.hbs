@@ -1,0 +1,28 @@
+		<form action="/superAdmin/addDistricts" method="POST">        			
+				   <select name="district">
+					   <option name="" value="">Select District</option>
+						<option name="Alappuzha" value="Alappuzha">Alappuzha</option>
+						<option name="Ernakulam" value="Ernakulam">Ernakulam</option>
+						<option name="Idukki" value="Idukki">Idukki</option>
+						<option name="Kannur" value="Kannur">Kannur</option>
+						<option name="Kasaragod" value="Kasaragod">Kasaragod</option>
+						<option name="Kottayam" value="Kottayam">Kottayam</option>
+						<option name="Kozhikode" value="Kozhikode">Kozhikode</option>
+						<option name="Malappuram" value="Malappuram">Malappuram</option>
+						<option name="Palakkad" value="Palakkad">Palakkad</option>
+						<option name="Thiruvananthapuram" value="Thiruvananthapuram">Thiruvananthapuram</option>
+						<option name="Thrissur" value="Thrissur">Thrissur</option>
+						<option name="Wayanad" value="Wayanad">Wayanad</option>
+					</select>
+			
+			<input type="submit" value="ADD">&nbsp;&nbsp;&nbsp;
+          <a href="/superAdmin" type="button">Close</button>
+        </form>
+		<table>
+			{{#each response}}
+			<tr>
+				<td>{{this.myId}}</td> <td>{{this.district}}</td>  <td><a onclick="return confirm('Are you sure, you want to delete it?')" href="/superAdmin/deleteDistrict/{{this._id}}">delete</a></td>
+			</tr>
+			{{/each}}
+		</table>
+		{{!-- <td> <a href="/superAdmin/editDistrict/{{this._id}}">edit</a> </td> --}}

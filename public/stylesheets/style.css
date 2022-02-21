@@ -1,0 +1,104 @@
+body{
+  background-image: url("/images/bg.jpg");
+}
+
+p{
+
+  font-family: 'Nunito', sans-serif;
+  
+  }
+  
+  ::placeholder{
+    font-family: 'Lato', sans-serif;
+  }
+  .usr{
+    font-family: 'Lato', sans-serif;
+  }
+.dvidr
+{
+  font-family: 'Lato', sans-serif;
+  color: grey;
+}
+  .btn{
+  
+    font-family: 'Readex Pro', sans-serif;
+  
+  }
+  
+  label{
+    padding: 4px;
+    color: black;
+    font-family: 'Lato', sans-serif;
+    color: #6a6a6a;
+  
+  }
+  
+  .txt{
+    font-size: 16px;
+    font-weight: normal;
+  }
+  a{
+    text-decoration: none;
+  }
+  .disableCard
+  {
+    pointer-events: none;
+    opacity: 0.9;
+    background: #CCC;
+  }
+#minBtn{
+  display: none;
+}
+
+  .dropbtn {
+    /* background-color: #3498DB; */
+    color: rgb(48, 48, 48);
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropup {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropup-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 220px;
+    bottom: 45px;
+    z-index: 1;
+  }
+  
+  .dropup-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropup-content a:hover {background-color: #ccc}
+  
+  .dropup:hover .dropup-content {
+    display: block;
+  }
+  
+  .dropup:hover {
+    background-color: #2980B9;
+  }
+
+  .dropbtn:hover {
+
+    color: #2980B9;
+  }
+
+  footer{
+    background-color: #e6e6e6;
+  }
+  .fa-folder{
+    font-size: 3em;
+    color: tomato;
+  }
+  

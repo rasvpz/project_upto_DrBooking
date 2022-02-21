@@ -1,0 +1,9 @@
+<h1>Hi {{allClinics.name}} </h1>
+<h1>Hi {{allClinics.whatsapp}} </h1>
+
+{{#each allClinics}}
+
+<p> <a href="/fetchDoctors/{{this.clinicName}}/{{../allClinics.whatsapp}}"> {{this.clinicName}}</a> </p>
+
+{{/each}}
+

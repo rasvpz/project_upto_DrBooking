@@ -1,0 +1,8 @@
+http://localhost:3000/superAdmin       SUPER ADMIN
+http://localhost:3000/clinicDashBoard  CLINIC ADMIN
+http://localhost:3000/userDashBoard    USER ADMIN
+http://localhost:3000/doctorDashBoard  DOCTOR'S
+
+
+PAY U
+https://www.youtube.com/watch?v=pzoZ2jHTEE8

@@ -1,0 +1,16 @@
+		<form action="/superAdmin/updateClinic" method="POST">
+        
+        			<select name="pachayath">
+					   <option name="" value="{{response.place}}">{{response.place}}</option>
+					</select> <br>     			
+                        <input type="text" value="{{response.clinicName}}" name="clinicName" placeholder="clinicName"><br>
+                        <input type="text" value="{{response.place}}" name="place"  placeholder="place"><br>
+                        <input type="text" value="{{response.contacts}}" name="contacts"  placeholder="contacts"><br>
+                        <input type="text" value="{{response.emails}}" name="emails"  placeholder="emails"><br>
+                        <input type="text" value="{{response.latitude}}" name="latitude"  placeholder="latitude"><br>
+                        <input type="text" value="{{response.longitude}}" name="longitude"  placeholder="longitude"><br>
+                        <input type="text" value="{{response.paymentMode}}" name="paymentMode"  placeholder="paymentMode"><br>	<br>			
+		<input type="submit" value="Update">&nbsp;&nbsp;&nbsp; <a href="/superAdmin" type="button">Close</button><br>	<br>
+      
+        </form>
+      
