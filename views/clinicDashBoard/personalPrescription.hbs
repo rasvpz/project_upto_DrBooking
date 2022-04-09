@@ -1,0 +1,168 @@
+<style>
+    .modal-body{
+        background-color: #ffffff;
+        border-left: 1px solid white;
+        border-right: 1px solid white;
+        text-align: center;
+        color: white;
+    }
+</style>
+
+<div class="container mt-3">
+  <h3>Small Modal Example</h3>
+  <p>Click on the button to open the modal.</p>
+  
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModalpersonalprescription">
+    Open modal
+  </button>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModalpersonalprescription">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Drug prescription</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="padding:0px">
+          <table width="100%" style="background-color: #198754; color:white; text-align:center;">
+              <tr>
+                  <td><h3>{{this.clinic}}</h3><p>{{this.drName}} Drug Prescription </p></td>
+              </tr>
+          </table>
+            <br>
+            <table width="100%" style="background-color: aliceblue;">
+                <tr>
+                    <td width="45%"> &nbsp;Patient : <span  style="border-bottom: 1px dotted grey; width:100%">{{this.patient}}</span></td>
+                    <td width="30%" align="right">Department : <span  style="border-bottom: 1px dotted grey; width:100%">{{this.drDept}}</span></td>
+                    <td width="25%" align="right">Date : <span  style="border-bottom: 1px dotted grey; width:100%">{{this.date}} &nbsp;</span></td>
+                </tr>
+            </table>
+<br>
+            <table width="100%" class="table table-hower" style="background-color: aliceblue;">
+                <tr>
+                    <th>Medicines</th>
+                    <th>Times</th>
+                    <th>Dose</th>
+                    <th>Days</th>
+                    <th>Rate</th>
+                </tr>
+
+
+                {{#if this.myTablet}}
+                    <tr>
+                    <td>{{this.myTablet.tablets}}</td>
+                    <td>{{this.myTablet.tabTimes}}</td>
+                    <td>{{this.myTablet.tabDose}}</td>
+                    <td>{{this.myTablet.tabDays}}</td>
+                    <td>{{this.myTablet.tabSubTotal}}</td>
+                    </tr>
+                   {{/if}}
+
+                    {{#if this.myInjection}}
+                    <tr>
+                    <td>{{this.myInjection.injection}}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{this.myInjection.injectionSubTotal}}</td>
+                    </tr>
+                   {{/if}}
+
+                    {{#if this.myPill}}
+                    <tr>
+                    <td>{{this.myPill.pills}}</td>
+                    <td>{{this.myPill.pillsTimes}}</td>
+                    <td>{{this.myPill.PillDose}}</td>
+                    <td>{{this.myPill.pillDays}}</td>
+                    <td>{{this.myPill.subPillTotal}}</td>
+                    </tr>
+                   {{/if}}
+
+                    {{#if this.myOintment}}
+                    <tr>
+                    <td>{{this.myOintment.ointments}}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{this.myOintment.subOintmentTotal}}</td>
+                    </tr>
+                   {{/if}}                   
+
+                    {{#if this.mySyrup}}
+                    <tr>
+                    <td>{{this.mySyrup.syrups}}</td>
+                    <td>{{this.mySyrup.syrupsTimes}}</td>
+                    <td>{{this.mySyrup.syrupsDose}}</td>
+                    <td>{{this.mySyrup.syrupDays}}</td>
+                    <td>{{this.mySyrup.syrupSubTotal}}</td>
+                    </tr>
+                   {{/if}}
+                   
+                    {{#if this.myBalm}}
+                    <tr>
+                    <td>{{this.myBalm.balms}}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{this.myBalm.balmSubTotal}}</td>
+                    </tr>
+                   {{/if}} 
+
+                    {{#if this.myPacket}}
+                    <tr>
+                    <td>{{this.myPacket.packets}}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{this.myPacket.packetSubTotal}}</td>
+                    </tr>
+                   {{/if}} 
+
+                    {{#if this.myOthers}}
+                    <tr>
+                    <td>{{this.myOthers.others}}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{this.myOthers.otherSubTotal}}</td>
+                    </tr>
+                   {{/if}} 
+                    
+                    <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>TOTAL</b></td>
+                    <td><b>{{this.total}}</b></td>
+                    </tr>
+                
+            </table>
+
+      
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>  <a href="/clinicDashBoard/prescribedPrescription/" type="submit" class="btn btn-success">Dispathed</a>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+    $(document).ready(function(){       
+   $('#myModal').modal('show');
+    }); 
+</script>
+
+

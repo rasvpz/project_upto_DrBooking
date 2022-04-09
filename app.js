@@ -1,3 +1,4 @@
+const http = require('http');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -7,12 +8,33 @@ var userRouter = require('./routes/user');
 var adminRouter = require('./routes/admin');
 var superAdminRouter = require('./routes/superAdmin');
 var clinicAdminRouter = require('./routes/clinicDashBoard');
+var doctorsAdminRouter = require('./routes/doctorsDashBoard');
 var { create } = require ('express-handlebars');
 var app = express();
+const MongoStore = require('connect-mongo');
 var db = require('./config/connection')
-
+const bodyParser = require('body-parser')
+const expressSession = require('express-session')
+const expressValidator = require('express-validator')
+const oneWeek = 604800000
 
 // view engine setup
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true}))
+// app.use(expressValidator ()) 
+app.use(express.static(path.join(__dirname, 'public'), { maxAge : oneWeek }))
+app.set('trusty proxy', 1)
+const session = {
+    secret: 'change this',
+    store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017' }),
+    resave: false,
+    saveUninitialized: true
+}
+if(process.env.PORT){
+    session.cookie = { secure:true }
+}
+app.use(expressSession(session))
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 const hbs = create({
@@ -37,6 +59,7 @@ app.use('/', userRouter);
 app.use('/admin', adminRouter);
 app.use('/superAdmin', superAdminRouter);
 app.use('/clinicDashBoard', clinicAdminRouter);
+app.use('/doctorsDashBoard', doctorsAdminRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

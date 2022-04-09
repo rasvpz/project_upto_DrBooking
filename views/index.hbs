@@ -1,24 +1,223 @@
-{{#each result}}
-<a href=""> {{this.district}} </a><br>
-{{/each}}
+<style>
+    ::placeholder{
+        color: rgba(245, 245, 245, 0.664) !important;
+        font-size: 13px;
 
+    }
+    .form-control{
+        border-radius: 0px !important;
+    }
+    .w3-container{
+        margin-top: 10% !important;
+        background-color: transparent !important;
+        box-shadow: 5px 10px 100px 30px  #03d67e;
+        border: 0.5px ridge #296958;
+    }
+    .inputTxt{
+        background-color: transparent !important;
+        border: 0px solid white;
+        border-bottom: 1px solid #0dcaf0 !important;
+        border-style: ridge !important;
+        padding-bottom: 8px !important;
+    }
+
+    .dropdown-menu{
+        border-radius: 0px !important;
+        margin-left: -12px;
+ 
+    }
+
+    
+</style>
+
+<div style="margin-left: 12px; margin-right:12px">
+
+    <div class="d-flex justify-content-center">
+
+
+
+        <h4 style="color: red;"> {{this.message}} </h4>
+        <br><br>
+
+        <form action="/submit" method="POST" id="signup" class="w3-container w3-padding-big w3-theme-d3" data-aos="flip-left"><br>
+        <p id="validation" class="text-danger"><i class='fas fa-user' style="color: white; font-size:23px"></i><font size="5" color="white">  SignUp</font>  <span style="float: right;"> <a class="text-info"> Allready member </a></span></p>
+            <div class="row">
+                <div class="col">                    
+                    <input class="inputTxt" type="text" name="name" placeholder="Enter your Name" class="form-control form-control-sm">
+                </div>
+                <div class="col">
+                    <input  class="inputTxt" type="text" name="email" placeholder="Enter your Email" class="form-control form-control-sm">
+                </div>
+            </div><br>
+
+
+            <div class="row">
+                <div class="col">
+                    <input  class="inputTxt" type="text" name="address" placeholder="Enter your Address" class="form-control form-control-sm">
+                </div>
+                <div class="col">
+                    <input  class="inputTxt" type="text" name="panchayath" placeholder="Enter your panchayath" class="form-control form-control-sm">
+                </div>
+            </div> <br>
+
+            <div class="row">
+                <div class="col">
+                   <input  class="inputTxt" type="text" name="whatsapp" placeholder="Enter your Whatsapp" class="form-control form-control-sm">
+               </div>
+                <div class="col">            
+                   <input  class="inputTxt" type="text" name="password" placeholder="Enter your Password" class="form-control form-control-sm">
+                </div>
+            </div><br>
+            <div class="row">
+            <div class="col"> 
+            <input  class="inputTxt" type="text" name="confirm_password" placeholder="Confirm your Password" class="form-control form-control-sm" style="width: 100% !important;">
+            </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col"> 
+               <input type="submit" class="form-control form-control-sm btn-info" style="width: auto; margin-left:350px"></div> <div class="col">   <input type="button" value="Close"  class="form-control form-control-sm btn-danger" style="width: auto; float:right"></div>
+            </div><br> 
+    </form>
+
+
+            <form action="/login" method="POST" style="width:400px; display:none;" id="login" class="w3-container w3-padding-big w3-theme-d3">
+                 <br><span id="validation" class="text-danger"><i class='fas fa-user' style="color: white; font-size:18px"></i><font size="5" color="white">  Login</font>  <span style="float: right;"> <a class="text-info"> forget password ? </a></span></span>
+                <br><br><input class="form-control form-control-sm inputTxt"  type="text" name="email" autofocus placeholder="User Name"><br>
+                <input class="form-control form-control-sm inputTxt"  type="text" name="password" placeholder="Password"><br><br>
+                <div class="row" style="margin-top: -20px;">
+                <input type="submit" class="form-control form-control-sm btn-info" style="width: auto; margin-left:65%">&nbsp;<input type="button" value="Close" class="form-control form-control-sm btn-danger" style="width: auto; float:right">
+                </div><br>
+            </form>
+
+            <form method="POST" action="/changePassword" style="width:400px; display: none;" id="changePassword" class="w3-container w3-padding-big w3-theme-d3">
+                 <br><span id="validation" class="text-danger"><i class='fas fa-user' style="color: white; font-size:18px"></i><font size="5" color="white"> Change Password</font>  <span style="float: right;"> <a class="text-info"></a></span></span>
+            <br><br>
+              <div class="row">
+                <div class="col"> 
+                    <input class="form-control form-control-sm inputTxt" type="text" name="oldPassword" placeholder="Old Password">
+                   <br> <input class="form-control form-control-sm inputTxt" type="text" name="password" placeholder="New Password">
+                </div>
+                </div><br><br>
+                 <div class="row" style="margin-top: -20px;">
+                <input type="submit" class="form-control form-control-sm btn-info" style="width: auto; margin-left:48%" value="Change Password">&nbsp;<input type="button" value="Close" class="form-control form-control-sm btn-danger" style="width: auto; float:right">
+                </div><br>
+            </form>
+
+            <form method="POST" action="/resetPassword" style="width:400px; display: none;" id="resetPassword" class="w3-container w3-padding-big w3-theme-d3">
+                <br><span id="validation" class="text-danger"><i class='fas fa-user' style="color: white; font-size:18px"></i><font size="5" color="white"> Reset Password</font>  <span style="float: right;"> <a class="text-info"></a></span></span>
+                <br><br>
+                <input type="text" name="code" placeholder="Verification Code" class="form-control form-control-sm inputTxt">
+                <br><input type="text" name="password" placeholder="New password" class="form-control form-control-sm inputTxt">
+                <br><input type="text" name="confirmPassword" placeholder="Confirm New password" class="form-control form-control-sm inputTxt">
+                <br><input type="text" name="email" placeholder="Email Address" class="form-control form-control-sm inputTxt"><br>
+                <br><div class="row" style="margin-top: -20px;">
+                <input type="submit" class="form-control form-control-sm btn-info" style="width: auto; margin-left:52%" value="Reset Password">&nbsp;<input type="button" value="Close" class="form-control form-control-sm btn-danger" style="width: auto; float:right">
+                </div><br>
+            </form>
+            
+
+            <form method="POST" action="/changeEmail" style="width:400px; display: none;"  id="changeEmail" class="w3-container w3-padding-big w3-theme-d3">
+                <br><span id="validation" class="text-danger"><i class='fas fa-user' style="color: white; font-size:18px"></i><font size="5" color="white"> Reset Email</font>  <span style="float: right;"> <a class="text-info"></a></span></span>
+                <br><br>
+                <input type="text" name="old-email" placeholder="Old Mail"  class="form-control form-control-sm inputTxt" autofocus>
+                <br><input type="text" name="email" placeholder="New Mail"  class="form-control form-control-sm inputTxt" autofocus>
+                <br><input type="password" name="password" placeholder="Password" class="form-control form-control-sm inputTxt"  autofocus><br><br>
+                <br><div class="row" style="margin-top: -20px;">
+                <input type="submit" class="form-control form-control-sm btn-info" style="width: auto; margin-left:52%" value="Reset Email">&nbsp;<input type="button" value="Close" class="form-control form-control-sm btn-danger" style="width: auto; float:right">
+                </div><br>
+               
+               
+            </form>
+</div>
+</div>
 
 <br><br>
 
-<form action = "/submit" method="POST"> 
-    <input type="text" name="name" placeholder="Enter your Name">
-    <input type="text" name="email" placeholder="Enter your Email"><br><br>
-    <input type="text" name="address" placeholder="Enter your Address">
-    <input type="text" name="panchayath" placeholder="Enter your panchayath"><br><br>
-    <input type="text" name="whatsapp" placeholder="Enter your Whatsapp">
-    <input type="text" name="password" placeholder="Enter your Password"><br><br>
-    <input type="submit"> &nbsp; &nbsp; <input type="button" value="Close">
-</form>
+</div>
 
-<br><br>
 
-<form action="/login" method="POST"> 
-    <input type="text" name="whatsapp" placeholder="Enter your Whatsapp">
-    <input type="text" name="password" placeholder="Enter your Password"><br><br>
-    <input type="submit"> &nbsp; &nbsp; <input type="button" value="Close">
-</form>
+<nav class="navbar navbar-expand-sm navbar-windows fixed-bottom" style="background: rgba( 0, 7, 199, 0.25 ) !important;
+box-shadow: 0 8px 32px 0 rgba(2, 10, 128, 0.527)  !important;
+backdrop-filter: blur( 4.5px )  !important;
+-webkit-backdrop-filter: blur( 4.5px )  !important;
+border-radius: 0px ;
+border: 1px solid rgba(255, 255, 255, 0.336)  !important; border: 1px solid rgba( 255, 255, 255, 0.18 );">
+    <div class="dropup" style="margin-left: 12px; margin-right:12px; font-size:20px">
+        <a href="#" data-bs-toggle="dropdown">
+             <img src="./images/wind.png"> &nbsp; &nbsp; <span style="color:white"> START </span> &nbsp; &nbsp;|&nbsp;&nbsp;</i>
+        </a>
+        <ul class="dropdown-menu" style="margin-top: 100px;">
+            {{#each result}}
+            <li><a class="dropdown-item" href="#">{{this.district}} </a></li>
+            {{/each}}
+        </ul>
+    </div>
+     <a href="#" onclick="login()" data-toggle="tooltip" title="Login"><img src="./images/login.png"></a> &nbsp; &nbsp; &nbsp;
+    <a href="#" onclick="changePassword()" data-toggle="tooltip" title="Forget Password"> <img src="./images/cpw.png"> </a>&nbsp; &nbsp; &nbsp;
+    <a href="#" onclick="resetPassword()" data-toggle="tooltip" title="Reset Password"> <img src="./images/pw.png"> </a>&nbsp; &nbsp; &nbsp;
+    <a href="#" onclick="changeEmail()" data-toggle="tooltip" title="Reset Email"><img src="./images/mail.png"></a>&nbsp;
+    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+
+</nav>
+</div>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+
+<script>
+    (function () {
+
+    var move = document.getElementById('myLogin');
+
+    move.onmousedown = function () {        
+        document.getElementById("signup").style.display = "none";
+        document.getElementById("login").style.display = "block";
+
+    };
+})();
+</script>
+
+<script>
+
+    function login() {
+
+        document.getElementById("login").style.display = "block";
+        document.getElementById("changePassword").style.display = "none";
+        document.getElementById("resetPassword").style.display = "none";
+        document.getElementById("changeEmail").style.display = "none";
+         document.getElementById("signup").style.display = "none";
+    }
+
+    function changePassword() {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("changePassword").style.display = "block";
+        document.getElementById("resetPassword").style.display = "none";
+        document.getElementById("changeEmail").style.display = "none";
+         document.getElementById("signup").style.display = "none";
+    }
+    function resetPassword() {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("changePassword").style.display = "none";
+        document.getElementById("resetPassword").style.display = "block";
+        document.getElementById("changeEmail").style.display = "none";
+         document.getElementById("signup").style.display = "none";
+    }
+    function changeEmail() {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("changePassword").style.display = "none";
+        document.getElementById("resetPassword").style.display = "none";
+        document.getElementById("changeEmail").style.display = "block";
+        document.getElementById("signup").style.display = "none";
+    }
+
+</script>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
+

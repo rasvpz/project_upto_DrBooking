@@ -1,9 +1,1029 @@
-<h1>Hi {{allClinics.name}} </h1>
-<h1>Hi {{allClinics.whatsapp}} </h1>
 
-{{#each allClinics}}
+<style>
+   @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&display=swap');
+    ::placeholder{
+        color: rgba(245, 245, 245, 0.664) !important;
+        font-size: 13px;
 
-<p> <a href="/fetchDoctors/{{this.clinicName}}/{{../allClinics.whatsapp}}"> {{this.clinicName}}</a> </p>
+    }
+    .form-control{
+        border-radius: 0px !important;
+    }
+    .w3-container{
+        margin-top: 10% !important;
+        background-color: transparent !important;
+        box-shadow: 5px 10px 100px 30px  #03d67e;
+        border: 0.5px ridge #296958;
+    }
+    .inputTxt{
+        background-color: transparent !important;
+        border: 0px solid white;
+        border-bottom: 1px solid #0dcaf0 !important;
+        border-style: ridge !important;
+        padding-bottom: 8px !important;
+    }
+
+    .dropdown-menu{
+        border-radius: 0px !important;
+        margin-left: -12px;
+        width: 365px;
+        background-color: #e4e4e4;
+        position: absolute;
+    }
+
+    .dropup .dropdown-menu[data-bs-popper] {
+
+    margin-bottom: 8px !important;
+}
+p{
+    font-family: 'Fredoka', sans-serif;
+}
+nav{
+
+}
+button{
+    border: none !important;
+    margin-bottom: 8px !important;
+}
+    
+</style>
+
+<div  id="myDcIV" >
+    
+    <div style="width: auto; padding-left:12px; margin-top:50px">        
+       <a href="#" data-bs-toggle="modal" data-bs-target="#myModalSlip"> <img style="margin-left: 24px; z-index: -1 !important;  position: relative;" src="./images/folder.png">
+        <div id="bookSlipNoti" style="position: absolute;display:none; background-color: red; color:white;padding:2px; margin-left:40px;width:24px; border-radius:50px; margin-top:-40px !important"> &nbsp;1&nbsp;</div>
+        <p style="margin-left: 12px;">Bookings</p>
+        <p style="margin-top: -20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Details</p>
+        </a>
+    </div>
+    
+
+    <div style="width: auto; padding-left:12px; margin-top:20px">
+        <img style="margin-left: 24px;" src="./images/folder.png">
+        <p style="margin-left: 11px;">&nbsp;&nbsp;History</p>
+    </div>
+
+    <div style="width: auto; padding-left:12px; margin-top:20px">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#myModalpersonalprescription"> <img style="margin-left: 24px; z-index: -1 !important;  position: relative;" src="./images/folder.png">
+        <div id="prescriptionSlipNoti" style="position: absolute;display:block; background-color: red; color:white;padding:2px; margin-left:40px;width:24px; border-radius:50px; margin-top:-40px !important"> &nbsp;1&nbsp;</div>
+        <p style="margin-left: 16px;">Medical</p>
+        <p style="margin-top: -20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Report</p>
+        </a>
+    </div>
+
+</div>
+
+    <div style="width: auto; padding-left:12px; margin-top:20px">
+        <img style="margin-left: 24px;" src="./images/folder.png">
+        <p style="margin-left: 24px;">Clinic</p>
+        <p style="margin-top: -20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Report</p>
+    </div>
+
+
+   {{#each bookings}} 
+<div id="timerOut" style="position:relative; display:none; margin-top:-600px; width:339; height:170; z-index:-1 !important" data-aos="flip-right">
+    <input type="text" id="bbkTimewithoutDate" value="{{this.bookingTime}}" hidden>
+    <input type="text" id="bbkTime" value="{{this.bookingDate}} {{this.bookingTime}}" >
+    <input type="text" id="conTime" value="{{this.bookingDate}} {{this.consultingTime}}" hidden>   
+    <input type="text" id="cognitoId" value="{{this.cognitoId}}" hidden> 
+<img src="./images/timerBg.png">
+<div style="margin-top: -112%; margin-left:155%; color:#0b4133; font-weight:bold ">Token<div style="margin-left: -4px; font-size:40px; margin-top:-8px; color:#07ac02; text-shadow: 1px 1px 2px black;">{{this.token}}</div> <input id="timer" type="text" value="{{this.token}}" hidden></div>
+    <h1 style="margin-left:183%; width:100%; margin-top:-60px;" id="decrementTime"></h1>
+</div>
 
 {{/each}}
 
+
+
+
+{{!-- <h1> </h1>
+<h1>{{myClinic.whatsapp}} </h1>
+
+{{#each myClinic}}
+<p> <a href="/fetchDoctors/{{this.clinicName}}/{{../myClinic.whatsapp}}"> {{this.clinicName}}</a> </p>
+{{/each}} --}}
+
+
+<div style="margin-left: 12px; margin-right:12px; margin-top:-500px">
+    <div class="d-flex justify-content-center">
+        <h4 style="color: red;"> {{this.message}} </h4>
+
+        <form method="POST" action="/changePassword" style="width:400px; display: none;" id="changePassword" class="w3-container w3-padding-big w3-theme-d3">
+                 <br><span id="validation" class="text-danger"><i class='fas fa-user' style="color: white; font-size:18px"></i><font size="5" color="white"> Change Password</font>  <span style="float: right;"> <a class="text-info"></a></span></span>
+            <br><br>
+              <div class="row">
+                <div class="col"> 
+                    <input class="form-control form-control-sm inputTxt" type="text" name="oldPassword" placeholder="Old Password">
+                   <br> <input class="form-control form-control-sm inputTxt" type="text" name="password" placeholder="New Password">
+                </div>
+                </div><br><br>
+                 <div class="row" style="margin-top: -20px;">
+                <input type="submit" class="form-control form-control-sm btn-info" style="width: auto; margin-left:48%" value="Change Password">&nbsp;<input type="button" onclick="myClose();" value="Close" class="form-control form-control-sm btn-danger" style="width: auto; float:right">
+                </div><br>
+            </form>
+
+            <form method="POST" action="/resetPassword" style="width:400px; display: none;" id="resetPassword" class="w3-container w3-padding-big w3-theme-d3">
+                <br><span id="validation" class="text-danger"><i class='fas fa-user' style="color: white; font-size:18px"></i><font size="5" color="white"> Reset Password</font>  <span style="float: right;"> <a class="text-info"></a></span></span>
+                <br><br>
+                <input type="text" name="code" placeholder="Verification Code" class="form-control form-control-sm inputTxt">
+                <br><input type="text" name="password" placeholder="New password" class="form-control form-control-sm inputTxt">
+                <br><input type="text" name="confirmPassword" placeholder="Confirm New password" class="form-control form-control-sm inputTxt">
+                <br><input type="text" name="email" placeholder="Email Address" class="form-control form-control-sm inputTxt"><br>
+                <br><div class="row" style="margin-top: -20px;">
+                <input type="submit" class="form-control form-control-sm btn-info" style="width: auto; margin-left:52%" value="Reset Password">&nbsp;<input onclick="myClose();"  type="button" value="Close" class="form-control form-control-sm btn-danger" style="width: auto; float:right">
+                </div><br>
+            </form>
+            
+
+            <form method="POST" action="/changeEmail" style="width:400px; display: none;"  id="changeEmail" class="w3-container w3-padding-big w3-theme-d3">
+                <br><span id="validation" class="text-danger"><i class='fas fa-user' style="color: white; font-size:18px"></i><font size="5" color="white"> Reset Email</font>  <span style="float: right;"> <a class="text-info"></a></span></span>
+                <br><br>
+                <input type="text" name="old-email" placeholder="Old Mail"  class="form-control form-control-sm inputTxt" autofocus>
+                <br><input type="text" name="email" placeholder="New Mail"  class="form-control form-control-sm inputTxt" autofocus>
+                <br><input type="password" name="password" placeholder="Password" class="form-control form-control-sm inputTxt"  autofocus><br><br>
+                <br><div class="row" style="margin-top: -20px;">
+                <input type="submit" class="form-control form-control-sm btn-info" style="width: auto; margin-left:52%" value="Reset Email">&nbsp;<input onclick="myClose();"  type="button" value="Close" class="form-control form-control-sm btn-danger" style="width: auto; float:right">
+                </div><br>
+               
+               
+            </form>
+</div>
+</div>
+
+
+<nav class="navbar navbar-expand-sm navbar-windows fixed-bottom" style="background: rgba( 0, 7, 199, 0.25 ) !important;
+box-shadow: 0 8px 32px 0 rgba(2, 10, 128, 0.527)  !important;
+backdrop-filter: blur( 4.5px )  !important;
+-webkit-backdrop-filter: blur( 4.5px )  !important;
+border-radius: 0px ;
+border: 1px solid rgba(255, 255, 255, 0.336)  !important; border: 1px solid rgba( 255, 255, 255, 0.18 );">
+    <div class="dropup" style="margin-left: 12px; margin-right:12px; font-size:20px">
+       
+        <a href="#" data-bs-toggle="dropdown" style="color: #d0e7f1;">
+          <img src="./images/wind.png"> &nbsp; &nbsp;{{myClinic.name}}
+          <input type="text" value="{{myClinic.name}}" hidden id="myName">
+        </a> &nbsp; &nbsp;|&nbsp;&nbsp;
+        <ul class="dropdown-menu" style="margin-top: 100px;">
+             <h4> &nbsp;&nbsp;&nbsp;.~ {{myClinic.panchayath}} </h4>
+            {{#each myClinic}}
+            <table width="100%">
+                
+                <tr>
+                    <td align="center" width="20%"> <img style="width:30px" src="./images/location.jpg"><br> <font color="#01a608" size="1"> <b>3.4 <br> km </b> </font></td>
+                    <td width="55%" valign="middle">
+                        <font size="2" style="margin-bottom: 4px !important;"> <b>{{this.clinicName}}</b></font>
+                       
+                        <table>                        
+                            <tr>
+                                <td><img style="margin-top: 8px; margin-rigt:8px; width:28px" src="./images/mobileIcon.jpg"></td>
+                                <td><font size="2" style="margin-top: 12px;">&nbsp;&nbsp;{{this.contacts}}<br>&nbsp;&nbsp;{{this.emails}}</font></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </td>                   
+
+                    
+                    <td width="25%">
+                        <a href="/fetchDoctors/{{this.clinicName}}/{{../myClinic.whatsapp}}"> <img src="./images/drBooking.jpg"> </a> <img src="./images/clinicBtn.jpg">
+                    </td>
+                    <img style="margin-bottom: 4px; margin-top: 1px;" src="./images/divider.jpg">
+                </tr>
+                
+            </table>
+            {{/each}}
+            <br><br><br><br>
+        </ul>
+    </div>
+    <a href="#" onclick="changePassword()" data-toggle="tooltip" title="Forget Password"> <img src="./images/login.png"> </a>&nbsp; &nbsp; &nbsp;
+    <a href="#" onclick="resetPassword()" data-toggle="tooltip" title="Reset Password"> <img src="./images/pw.png"> </a>&nbsp; &nbsp; &nbsp;
+    <a href="#" onclick="changeEmail()" data-toggle="tooltip" title="Reset Email"><img src="./images/mail.png"></a>&nbsp;
+    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a id="live" style="display: none;" href="#"  data-bs-toggle="modal" data-bs-target="#myModalChat" data-toggle="tooltip" title="Live"><img src="./images/video.png"></a>&nbsp;
+<audio id="myAudio">
+  <source src="./images/message.m4r" type="audio/ogg">
+</audio>
+</nav>
+</div>
+<!-- The Modal -->
+<div class="modal" id="myModalChat">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><img src="./images/video.png">{{#each bookings}} &nbsp;&nbsp; {{this.doctorName}} {{/each}}</h4>
+        <button type="button" class="btn-close" onclick="validateShipping()"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+            <div class="row">
+    <div class="col p-3">
+                    	<div class="booth">
+					<video id="video" width="100%" height="100%" autoplay></video>
+				</div>
+    </div>
+    <div class="col p-3">
+
+<table width="100%">
+    <tr>
+        <td>
+                                	<div class="align">
+	<button onclick="execCmd('bold');"><i class="fas fa-bold"></i></button>
+	<button onclick="execCmd('italic');"><i class="fas fa-italic"></i></button>
+	<button onclick="execCmd('underline');"><i class="fas fa-underline"></i></button>
+	&nbsp;&nbsp;&nbsp;
+	<button onclick="execCmd('strikethrough');"><i class="fas fa-strikethrough"></i></button>
+	<button onclick="execCmd('subscript');"><i class="fas fa-subscript"></i></button>
+	<button onclick="execCmd('superscript');"><i class="fas fa-superscript"></i></button>
+	&nbsp;&nbsp;&nbsp;
+	<button onclick="execCmd('justifyLeft');"><i class="fas fa-align-left"></i></button>
+	<button onclick="execCmd('justifyCenter');"><i class="fas fa-align-center"></i></button>
+	<button onclick="execCmd('justifyRight');"><i class="fas fa-align-right"></i></button>
+	<button onclick="execCmd('justifyFull');"><i class="fas fa-align-justify"></i></button>
+	&nbsp;&nbsp;&nbsp;
+	<button onclick="execCmd('cut');"><i class="fas fa-cut"></i></button>
+	<button onclick="execCmd('copy');"><i class="fas fa-copy"></i></button>
+	<button onclick="execCmd('paste');"><i class="fas fa-paste"></i></button>
+	&nbsp;&nbsp;&nbsp;
+	<button onclick="execCmd('indent');"><i class="fas fa-indent"></i></button>
+	<button onclick="execCmd('outdent');"><i class="fas fa-outdent"></i></button>
+	&nbsp;&nbsp;&nbsp; <br>
+	<button onclick="execCmd('undo');"><i class="fas fa-undo"></i></button>
+	<button onclick="execCmd('redo');"><i class="fas fa-redo"></i></button>
+	&nbsp;&nbsp;&nbsp;
+	<button onclick="execCmd('InsertOrderedList');"><i class="fas fa-list-ol"></i></button>
+	<button onclick="execCmd('InsertUnorderedList');"><i class="fas fa-list-ul"></i></button>
+	<button onclick="execCmd('insertParagrapg');"><i class="fas fa-paragraph"></i></button>
+	&nbsp;&nbsp;&nbsp;
+	<button onclick="myFunction()"><i class="fas fa-table"></i></button>
+	<button onclick="execCmd('InsertHorizontalRule');"><u>hr</u></i></button>
+	&nbsp;&nbsp;&nbsp;
+	<button onclick="execCommandWithArg('createLink', prompt('Enter A URL','http://'));"><i class="fas fa-link"></i></button>
+	<button onclick="execCmd('unlink');"><i class="fas fa-unlink"></i></button>
+	<button onclick="toggleSource();"><i class="fas fa-code"></i></button>
+	&nbsp;&nbsp;
+	
+	<button class="bgbtn" onclick="toggleEdit();">SourceEdit</button>
+	
+	<br><br>
+	<div class="secrow">
+	<select onchange="execCommandWithArg('formatBlock', this.value);">
+		<option value="H1">H1</option>
+		<option value="H2">H2</option>
+		<option value="H3">H3</option>
+		<option value="H4">H4</option>
+		<option value="H5">H5</option>
+		<option value="H6">H6</option>
+	</select>
+	
+	<select onchange="execCommandWithArg('fontName', this.value);">
+		<option value="Arial">Arial</option>
+		<option value="Comic Sans MS">Comic Sans MS</option>
+		<option value="Courier">Courier</option>
+		<option value="Georgia">Georgia</option>
+		<option value="Tahoma">Tahoma</option>
+		<option value="Times New Roman">Times New Roman</option>
+		<option value="Verdana">Verdana</option>
+	</select>
+
+		<select onchange="execCommandWithArg('fontSize', this.value);">
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+		<option value="4">4</option>
+		<option value="5">5</option>
+		<option value="6">6</option>
+		<option value="7">7</option>
+	</select>
+
+	&nbsp;&nbsp;&nbsp;&nbsp;FC: <input type="color" onchange="execCommandWithArg('foreColor', this.value);">
+	BG: <input type="color" onchange="execCommandWithArg('hiliteColor', this.value);">
+
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="execCommandWithArg('insertImage', prompt('Enter A URL',''));"><i class="fas fa-file-image"></i></button>
+	<button class="bgbtn" onclick="execCmd('bold');">Select All</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button class="bgbtn" onclick="saveHistory();">Save to history</button>
+	<button class="bgbtn" onclick="saveCormodity();">Save to cormodity</button>
+	</div>
+
+	</div>
+<br>
+	<div class="richTextField">
+	<iframe name="richTextField" id="richTextField" style="width: 100%; height: 300px;"></iframe>
+	<p id="demo"></p>
+	</div>
+        </td>
+    </tr>
+</table>
+
+    </div>
+
+  </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Closed</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModalpersonalprescription">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Drug prescription</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body" style="padding:0px">
+          <table width="100%" style="background-color: #198754; color:white; text-align:center;">
+              <tr>
+                  <td><h3>{{result.clinic}}</h3><p>{{result.drName}} Drug Prescription </p></td>
+              </tr>
+          </table>
+            <br>
+            <table width="100%">
+                <tr>
+                    <td width="45%"> &nbsp;Patient : <span  style="border-bottom: 1px dotted grey; width:100%">{{result.patient}}</span></td>
+                    <td width="30%" align="right">Department : <span  style="border-bottom: 1px dotted grey; width:100%">{{result.drDept}}</span></td>
+                    <td width="25%" align="right">Date : <span  style="border-bottom: 1px dotted grey; width:100%">{{result.date}} &nbsp;</span></td>
+                </tr>
+            </table>
+<br>
+            <table width="100%" class="table table-hower">
+                <tr>
+                    <th>Medicines</th>
+                    <th>Times</th>
+                    <th>Dose</th>
+                    <th>Days</th>
+                    <th>Rate</th>
+                </tr>
+
+
+                {{#if result.myTablet}}
+                    <tr>
+                    <td>{{result.myTablet.tablets}}</td>
+                    <td>{{result.myTablet.tabTimes}}</td>
+                    <td>{{result.myTablet.tabDose}}</td>
+                    <td>{{result.myTablet.tabDays}}</td>
+                    <td>{{result.myTablet.tabSubTotal}}</td>
+                    </tr>
+                   {{/if}}
+
+                    {{#if result.myInjection}}
+                    <tr>
+                    <td>{{result.myInjection.injection}}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{result.myInjection.injectionSubTotal}}</td>
+                    </tr>
+                   {{/if}}
+
+                    {{#if result.myPill}}
+                    <tr>
+                    <td>{{result.myPill.pills}}</td>
+                    <td>{{result.myPill.pillsTimes}}</td>
+                    <td>{{result.myPill.PillDose}}</td>
+                    <td>{{result.myPill.pillDays}}</td>
+                    <td>{{result.myPill.subPillTotal}}</td>
+                    </tr>
+                   {{/if}}
+
+                    {{#if result.myOintment}}
+                    <tr>
+                    <td>{{result.myOintment.ointments}}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{result.myOintment.subOintmentTotal}}</td>
+                    </tr>
+                   {{/if}}                   
+
+                    {{#if result.mySyrup}}
+                    <tr>
+                    <td>{{result.mySyrup.syrups}}</td>
+                    <td>{{result.mySyrup.syrupsTimes}}</td>
+                    <td>{{result.mySyrup.syrupsDose}}</td>
+                    <td>{{result.mySyrup.syrupDays}}</td>
+                    <td>{{result.mySyrup.syrupSubTotal}}</td>
+                    </tr>
+                   {{/if}}
+                   
+                    {{#if result.myBalm}}
+                    <tr>
+                    <td>{{result.myBalm.balms}}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{result.myBalm.balmSubTotal}}</td>
+                    </tr>
+                   {{/if}} 
+
+                    {{#if result.myPacket}}
+                    <tr>
+                    <td>{{result.myPacket.packets}}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{result.myPacket.packetSubTotal}}</td>
+                    </tr>
+                   {{/if}} 
+
+                    {{#if result.myOthers}}
+                    <tr>
+                    <td>{{result.myOthers.others}}</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>{{result.myOthers.otherSubTotal}}</td>
+                    </tr>
+                   {{/if}} 
+                    
+                    <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>TOTAL</b></td>
+                    <td><b>{{result.total}}</b></td>
+                    </tr>
+                
+            </table>
+
+      
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>  <button type="button" onclick="payment1('{{result.total}}')" class="btn btn-success">Pay {{result.total}}/-</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- The Modal -->
+<div class="modal" id="myModalSlip" >
+     {{#each bookings}} 
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="padding:1px 8px !important;">
+        <h4 class="modal-title" style="border-bottom: 0px !important;">Booking Reciepts <button style="border: 0px !important; border-radius:50px; margin-bottom:8px !important" class="btn btn-danger" value="{{this.token}}">{{this.token}}</button></h4>
+        <button type="button" id="myBtn" class="btn">X</button>
+      </div>
+
+      <!-- Modal body -->
+        <div class="modal-body" style="position: relative; flex: 1 1 auto; padding: 0rem !important;">
+
+            <table class="table table-bordered" width="100%" style="margin-bottom: 0px !important;">
+                <tr>
+                    <td colspan="2"> 
+                        <table width="100%">
+                            <tr>
+                                <td width="75%"><b>{{this.newName}} {{this.panchayath}}</b></td>
+                                <td width="25%" align="right"> <span style="padding:4px"><b>{{this.bookingDate}}</b></span></td>
+                            </tr>
+                        </table>
+                    </td>                   
+                </tr>
+                <tr> 
+                    <td>{{this.doctorName}}</td>
+                    <td>Patient : {{this.name}}</td>
+                </tr>
+                  <tr > 
+                    <td>Dr Fees : 500 {{this.fees}}</td>
+                    <td>Address : {{this.address}}</td>
+                </tr>
+                    <tr > 
+                    <td>DEPT : {{this.department}}</td>
+                    <td>Place : {{this.panchayath}} {{this.whatsapp}} </td>
+                </tr>
+                                   <tr > 
+                    <td><b>Consulting Time</b></td>
+                    <td><b>{{this.consultingTime}}</b></td>
+                </tr>
+            </table>
+
+             {{/each}} 
+                   <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+        </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+
+<script>
+var stop = function() {
+  var stream = video.srcObject;
+  var tracks = stream.getTracks();
+
+  for (var i = 0; i < tracks.length; i++) {
+    var track = tracks[i];
+    track.stop();
+  }
+
+  video.srcObject = null;
+}
+
+var start = function(){
+	var video = document.getElementById('video'),
+	 vendorUrl = window.URL || window.webkitURL;
+
+	if (navigator.mediaDevices.getUserMedia) {
+		navigator.mediaDevices.getUserMedia({ video: true })
+		.then(function (stream) {
+		  video.srcObject = stream;
+		}).catch(function (error) {
+		  console.log("Something went wrong!");
+		});
+	}
+}
+$(function() {
+    start();
+});
+</script>
+
+<script type="text/javascript">
+		
+var showingSourceCode = false;
+var isInEditMode = true;
+
+		function enableEditMode () {
+			richTextField.document.designMode='On';
+		}
+
+		function execCmd (command) {
+			richTextField.document.execCommand(command, false, null);
+		}
+
+			function execCommandWithArg (command, arg) {
+			richTextField.document.execCommand(command, false, arg);
+		}
+
+		function toggleSource (){
+
+			if (showingSourceCode) {
+				richTextField.document.getElementsByTagName('body')[0].innerHTML = richTextField.document.getElementsByTagName('body') [0].textContent;
+				showingSourceCode=false;
+			}else{
+			richTextField.document.getElementsByTagName('body')[0].textContent = richTextField.document.getElementsByTagName('body') [0].innerHTML;
+				showingSourceCode=true;
+			}
+		}
+
+		function toggleEdit () {
+			if(isInEditMode){
+				richTextField.document.designMode = 'off'
+				isInEditMode = false;
+			}else{
+				richTextField.document.designMode = 'on'
+				isInEditMode = true;
+			}
+		}
+
+	</script>
+
+	<script>
+function myFunction() {
+	var vr = prompt("Please enter your row");	
+	var vc = prompt("Please enter your column");
+
+var table = '' ;
+var rows = vr;
+var cols = vc;
+
+for(var r=0; r<rows; r++)
+{
+	table += '<tr>' ;	
+	for(var c = 1; c <= cols; c++)
+	{
+		table += '<td>' + '</td>' ;
+	}
+		table += '</tr>' ;
+}
+var s = '<table border=1 width="100%">' + table + '</table>';
+richTextField.document.getElementsByTagName('body')[0].innerHTML= richTextField.document.getElementsByTagName('body') [0].innerHTML+s;
+
+
+}
+
+function saveHistory (){
+ showingSourceCode=true;
+	var iframe = document.getElementById("richTextField");
+	var iframe_contents = document.getElementById('htmlHistory').innerHTML  + iframe.contentDocument.body.innerHTML + "<hr>";
+	var cognitoId = document.getElementById('cognitoId').value
+	var name = document.getElementById('name').value
+
+         $.ajax({
+            url:'/doctorsDashBoard/treatMentDetails',
+            data:{
+                iframe: iframe_contents,
+				cognitoId : cognitoId,
+				name: name,
+				action: 'Cormodity'
+            },
+            method:'post',
+            success:(resp)=>{
+				document.getElementById('htmlHistory').innerHTML = resp
+				iframe.contentDocument.body.innerHTML = ""
+            }
+         })
+}
+
+function saveCormodity(){	
+    showingSourceCode=true;
+	var iframe = document.getElementById("richTextField");
+	var iframe_contents = document.getElementById('htmlCormodity').innerHTML  + iframe.contentDocument.body.innerHTML ;
+	var cognitoId = document.getElementById('cognitoId').value
+	var name = document.getElementById('name').value
+	 {{!-- const d = new Date() --}}
+	{{!-- var myDate  = "<p style='color:red; font-weight:bold; margin-bottom: 0px !important'>" + d.getMonth() + 1 + "-" + d.getDate() + "-" + d.getFullYear() + "</p>"  --}}
+         $.ajax({
+            url:'/doctorsDashBoard/cormodityMedicine',
+            data:{
+                iframe: iframe_contents,
+				cognitoId : cognitoId,
+				name: name,
+				action: 'Cormodity'
+            },
+            method:'post',
+            success:(resp)=>{
+				alert('resp')
+				document.getElementById('htmlCormodity').innerHTML = resp.cormodity + " "
+				iframe.contentDocument.body.innerHTML = ""
+            }
+         })
+}
+
+</script>
+
+
+<script>
+    var timer = document.getElementById('timer').value
+    if(timer){
+        document.getElementById('timerOut').style.display='block'
+        document.getElementById('bookSlipNoti').style.display='block'
+    }else{
+         document.getElementById('timerOut').style.display='none'
+    }
+</script>
+
+<script>
+        function changePassword() {
+        document.getElementById("changePassword").style.display = "block";
+        document.getElementById("resetPassword").style.display = "none";
+        document.getElementById("changeEmail").style.display = "none";
+        document.getElementById('timerOut').style.display='none'
+
+    }
+    function resetPassword() {
+        document.getElementById("changePassword").style.display = "none";
+        document.getElementById("resetPassword").style.display = "block";
+        document.getElementById("changeEmail").style.display = "none"; 
+        document.getElementById('timerOut').style.display='none'
+
+
+    }
+    function changeEmail() {
+        document.getElementById("changePassword").style.display = "none";
+        document.getElementById("resetPassword").style.display = "none";
+        document.getElementById("changeEmail").style.display = "block";
+        document.getElementById('timerOut').style.display='none'
+
+
+    }
+
+function myClose(){
+    document.getElementById("changePassword").style.display = "none";
+    document.getElementById("resetPassword").style.display = "none";
+    document.getElementById("changeEmail").style.display = "none";
+        document.getElementById('timerOut').style.display='none'
+        document.getElementById('timerOut').style.display='block'
+
+
+}
+
+</script>
+
+<script>
+    function func() {
+        var dateValue2 = document.getElementById("bbkTime").value;
+        var dateValue1 = document.getElementById("conTime").value;        
+ 
+        var date = Math.abs((new Date(dateValue2).getTime() / 1000).toFixed(0));
+        var date2 = Math.abs((new Date(dateValue1).getTime() / 1000).toFixed(0));
+ 
+        var diff = date2 - date;
+        var days = Math.floor(diff / 86400);
+        var hours = Math.floor(diff / 3600) % 24;
+        var minutes = Math.floor(diff / 60) % 60;
+        var seconds = diff % 60; 
+        var daysStr = days;
+
+  
+        var hoursStr = hours;
+        if (hours < 10) {
+            hoursStr = "0" + hours;
+        }
+  
+        var minutesStr = minutes;
+        if (minutes < 10) {
+            minutesStr = "0" + minutes;
+        }
+  
+        var secondsStr = seconds;
+        if (seconds < 10) {
+            secondsStr = "0" + seconds;
+        }
+ 
+
+
+        const startingHour = hoursStr
+        const startingMinutes = minutesStr
+        let time = startingMinutes * 60
+ 
+            var countdownEl = document.getElementById("decrementTime")
+             
+         
+         setInterval(updateCountDown, 1000)
+
+function updateCountDown() {
+
+const d = new Date();
+var chr = d.getHours();
+var cmin = d.getMinutes();
+var csec = d.getSeconds();
+var cTime = chr+":"+cmin+":"+csec
+var cBooking = document.getElementById("bbkTimewithoutDate").value
+
+            let minutes = Math.floor(time / 60)
+            minutes = minutes < 10 ? '0' + minutes : minutes
+
+            let seconds = time % 60
+            seconds = seconds < 10 ? '0' + seconds : seconds
+
+            if(minutes == 00 && seconds == 00){
+                countdownEl.innerHTML= `<h3> &nbsp;&nbsp; Please Join<br> &nbsp;&nbsp; Vedeo Chat</h3>`
+                document.getElementById('live').style.display='block'
+                    var x = document.getElementById("myAudio");
+                    x.play();    
+                   const name = document.getElementById('myName').value
+                    let speech = new SpeechSynthesisUtterance()
+
+                    speech.text = `Hello Mr ${name}. Please join the video chat`
+                    speech.pitch =1
+                    speech.volume = 1
+                    speech.lang = 'en-US'
+                    speech.rate = 1
+                    speechSynthesis.speak(speech) 
+
+            }
+            else{
+                countdownEl.innerHTML = `${startingHour} : ${minutes} : <sup>${seconds}</sup>`
+                time--
+            }            
+        }
+
+
+        {{!-- document.getElementById("decrementTime").innerHTML = daysStr + " days, " + hoursStr + ":" + minutesStr + ":" + secondsStr; --}}
+    }
+ func()
+</script>
+
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
+<script>
+$(document).ready(function(){
+   
+  // Hide the Modal
+  $("#myBtn").click(function(){
+    $("#myModalSlip").modal("hide");
+     document.getElementById('bookSlipNoti').style.display='none'
+  });
+});
+
+function validateShipping(){
+$('#myModalChat').modal('hide');
+var bTime = document.getElementById('bbkTimewithoutDate').value
+var cognitoId = document.getElementById('cognitoId').value
+
+        $.ajax({
+            url:'/fetchPrescription',
+            data:{
+                bTime,
+                cognitoId
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                    location.href = '/login';
+
+                }
+                else{
+                    location.href = '/login'
+                }
+            }          
+        })
+
+}
+
+</script>
+
+{{!-- <script>
+    
+   var bTime = document.getElementById('bbkTime').innerHTML
+   var cTime =  document.getElementById('conTime').innerHTML
+
+var d1 = bTime //"now"
+var d2 = cTime // some date
+alert(d1)
+var diff = Math.abs(d1-d2);  // difference in milliseconds
+document.getElementById('decrementTime').innerHTML = diff
+
+</script> --}}
+
+ <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+    function payment1(amount){
+      
+         $.ajax({
+             
+            url:'/paymentPrescription',
+            data:{
+                amount,
+                
+            },
+            method:'post',
+            success:(resp)=>{
+                if(resp.status){
+                 
+                    razorpay1(resp.response);
+                }
+                else{
+                  
+                    location.href = '/'
+                }
+            }
+         })
+    }
+    
+    function razorpay1(order){
+        
+        var options = {
+            "key": "rzp_test_nUVcKdOUWrUXIZ", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Rash",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response){
+                verifyPayment1(response,order);
+            },
+            "prefill": {
+                "name": "Outfits",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+    }
+
+     function verifyPayment1(payment,order){
+        $.ajax({
+            url:'/verify-payment',
+            data:{
+                
+                payment,
+                order
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                    
+                    location.href = '/paymentSuccessful';
+                }
+                else{
+                    location.href = '/'
+                }
+            }          
+        })
+    }
+
+    </script>
+
+    <script>
+
+    function payment(fees,contact,bookingTime){
+        alert(fees)
+         $.ajax({
+            url:'/payment',
+            data:{
+                fees,
+                contact,
+                bookingTime, 
+            },
+            method:'post',
+            success:(resp)=>{
+                if(resp.status){                 
+                    razorpay(resp.response,bookingTime);
+                }
+                else{
+                  
+                    location.href = '/'
+                }
+            }
+         })
+    }
+    
+    function razorpay(order,bookingTime){
+        
+        var options = {
+            "key": "rzp_test_nUVcKdOUWrUXIZ", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Rash",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response){
+                verifyPayment(response,order,bookingTime);
+            },
+            "prefill": {
+                "name": "Outfits",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+    }
+
+     function verifyPayment(payment,order,bookingTime){
+        $.ajax({
+            url:'/verify-payment',
+            data:{
+                bookingTime,
+                payment,
+                order
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                    location.href = '/bookedSuccessfully';
+                }
+                else{
+                    location.href = '/'
+                }
+            }          
+        })
+    }
+
+
+
+    </script>

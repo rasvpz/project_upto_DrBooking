@@ -1,0 +1,25 @@
+
+<form method="post" action="/clinicDashBoard/addMedicineProvider">
+<h1>Provider Management <input type="text" name="clinicName" {{#if fecthedmedCompanies.clinicName}}
+value="{{fecthedmedCompanies.clinicName}}"
+{{else}}
+ value="{{name}}"
+ {{/if}}> </h1>
+<input type="text" name="companyName" placeholder="companyName"><br>
+<input type="text" name="companyAddress" placeholder="companyAddress"><br>
+<input type="text" name="companyContact" placeholder="companyContact"><br>
+<input type="text" name="companyExec" placeholder="companyExec"><br>
+<input type="submit">
+</form> 
+
+<table border="1">
+    {{#each fecthedmedCompanies}}
+    <tr>
+       <td>{{this.clinicName}}</td>
+        <td>{{this.companyName}}</td>
+        <td>{{this.companyAddress}}</td>
+        <td>{{this.companyContact}}</td>
+        <td>{{this.companyExec}}</td>        
+    </tr>
+    {{/each}}
+</table>

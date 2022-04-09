@@ -1,12 +1,18 @@
+<style>
+    body{
+        background-image: none;
+    }
+</style>
 <h2>Hi {{clinicAdminLogin.data.clinicName}} Login Successfully</h2>
 <table width="100%" border="1">
     <tr>
         <td width="20%" valign="top">
             <h3>SETTINGS</h3>
             <a href="/clinicDashBoard/doctorsManagement/{{clinicAdminLogin.data.clinicName}}">Doctors Management</a><br>
-            <a href="">Medicine Management</a><br>
+            <a href="/clinicDashBoard/medicineProvider/{{clinicAdminLogin.data.clinicName}}">Medicine Provider Management</a><br>
+            <a href="/clinicDashBoard/medicineManagement/{{clinicAdminLogin.data.clinicName}}">Medicine Management</a><br>
             <a href="">Todays Booking</a><br>
-            <a href="">Orders Management</a><br>
+            <a href="/clinicDashBoard/prescribedPrescription/">Prescription Management</a><br>
             <a href="">User Management</a><br>
         </td>
 
@@ -39,7 +45,7 @@
                     <td>{{this.department}}</td>
                     <td>{{this.consultingTime}}</td>
                     <td>{{this.contact}}</td>
-                    <td><a href="">Edit</a>&nbsp;&nbsp;&nbsp;<a onclick="return confirm('Are you sure, you want to delete it?')" href="/clinicDashBoard/deleteClinicDoctors/{{this._id}}">Delete</a></td>
+                    <td><a href="/clinicDashBoard/editClinicDoctors/{{this._id}}">Edit</a>&nbsp;&nbsp;&nbsp;<a onclick="return confirm('Are you sure, you want to delete it?')" href="/clinicDashBoard/deleteClinicDoctors/{{this._id}}">Delete</a></td>
                 </tr>
                 {{/each}}
             </table>

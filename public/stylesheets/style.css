@@ -101,4 +101,9 @@ p{
     font-size: 3em;
     color: tomato;
   }
+
+ 
+  .form-control{
+    border-radius: 0px !important;
+  }
   

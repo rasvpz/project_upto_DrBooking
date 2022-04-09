@@ -1,32 +1,146 @@
-<form>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400&display=swap');
+
+    body{
+        font-family: 'Fredoka', sans-serif;
+    } 
+.col-lg-4
+    {
+        box-shadow: 1px 1px 2px 1px lightblue; width:265px !important; margin-right:16px;border-top-left-radius: 50px;border-top-right-radius: 50px; margin-bottom: 12px !important;
+    }
+.btn-info{
+    background-color: #36b7b3;
+}
+.container{
+    box-shadow: 3px 30px 12px 3px rgb(75, 75, 75);
+   
+}
+.noshadow{
+   box-shadow: 0px 0px 0px 0px rgb(75, 75, 75) !important;
+}
+
+p{
+    font-family: 'Fredoka', sans-serif;
+}
+.table{
+    padding:  0px !important;
+    margin: 0px !important;
+}
+</style>
+<br><br>
+
+
+
       {{!-- style="display: none;" --}}
-<h1>Doctors of {{newName}}</h1>
+      <div style="display: none;">
+<h1>Doctors of {{newName}} </h1>
+Your Token Time : <b>{{bookingToken.token}}</b> - 
+Your Culsulting time :  <b>{{bookingToken.consultingTime}}</b> <br>
 {{!-- <input type="text" name="clinicName" value="{{newName}}">
 <input type="text" name="name" value="{{user.name}}"> --}}
 {{user.name}}
 {{user.address}}
 {{user.panchayath}}
 {{user.whatsapp}}
-
-{{#each result}}
-<table>
+</div>
+<div class="container" style="background-color: #eeeeee;"  data-aos="flip-left">
+<table class="table" width="100%" bgcolor="#eeeeee" >
     <tr>
-        <td>{{this.doctorName}} </td>
-    </tr>
-    <br><br>
-        <tr>
-        <td>{{this.department}}</td>
-    </tr>       
-     <tr>
-        <td>{{this.degreee}}</td>
-    </tr>
-     <tr>
-        <td>{{this.consultingTime}}</td>
-    </tr>
-         <tr>
-        <td> <a href="/bookings/{{this.doctorName}}/{{this.department}}/{{../newName}}/{{../user.name}}/{{../user.address}}/{{../user.panchayath}}/{{../user.whatsapp}}">BOOKING</a> </td>
+        <td><h4>Doctors of {{newName}} </h4></td>
+
+        <td valign="bottom" align="right" style="color:rgb(92, 92, 92); font-size:22">
+            <form method="post" action="/login" style="padding: 0px !important;">
+             <input type="submit" value="x" style="border: none;">
+             <input name="email" type="text" value="{{user.email}}" hidden>             
+             <input name="password" type="text" value="{{user.password}}" hidden>
+            </form>
+        </td>
     </tr>
 </table>
-{{/each}}
 
-</form>
+    <div class="row" style="background-color: white; margin-bottom:8px !important; padding-top:12px; padding-left:12px">
+    {{#each result}}
+    <br><br>
+    <div class="col-lg-4 col-sm-12 col-xs-12 col-md-6 p-0">
+      <div style="width: 100%; background-color:#2f89ff; height:220px; border-top-left-radius: 50px; border-top-right-radius: 50px; border-bottom-right-radius: 80px; padding:8px; padding-left:16px; "> 
+         <br> <p style="text-align: right; font-size 18: font-weight:bold"><u>ready for booking</u> &nbsp;&nbsp;&nbsp;</p>
+         <span style="color:#28314c; font-size:25px; font-weight:bold">{{this.doctorName}}</span>
+         <p id="currentDate" style="font-weight:bold; color:white"></p>
+         <p style="margin-top: -20px; font-size:16px; font-weight:bold; color:rgb(212, 211, 212);">{{this.consultingTime}}</p>
+         <img style="width: 90px; border-radius:40%; border: 5px solid rgb(255, 255, 255); margin-left:30% " src="data:image/jpeg;base64,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">
+     </div>  <br>
+     <div style="margin:8px"><h2>{{this.department}}<br><small>{{this.degreee}}</small></h2></div><br>
+     <p style="background-color: #d5f9fd; padding:8px; border-left: 3px solid #81f1ff; margin:px; border-right: 3px solid #81f1ff;"> {{this.clinicName}}  offer treatment to patients with specialized staff and equipment.</p>
+    <br><a class="btn btn-info" style=" width:auto; float:right; margin-right:8px; margin-top:-20px; margin-bottom:10px !important" href="/bookings/{{this.doctorName}}/{{this.department}}/{{../newName}}/{{../user.name}}/{{../user.address}}/{{../user.panchayath}}/{{../user.whatsapp}}">BOOKING</a>
+    </div>
+   
+    {{/each}} 
+   
+  </div>
+</div>
+
+<div class="container noshadow" style="background-color: #e4e2e2c2; height:36px; margin-top:-20px"  data-aos="flip-left"></div>
+
+<div style="margin-top: -656px;">
+        <div style="width: auto; padding-left:12px; margin-top:50px">
+        <img style="margin-left: 24px;" src="http://localhost:1000/images/folder.png">
+        <p style="margin-left: 12px;">Bookings</p>
+        <p style="margin-top: -20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Details</p>
+    </div>
+
+    <div style="width: auto; padding-left:12px; margin-top:20px">
+        <img style="margin-left: 24px;" src="http://localhost:1000/images/folder.png">
+        <p style="margin-left: 11px;">&nbsp;&nbsp;History</p>
+    </div>
+
+    <div style="width: auto; padding-left:12px; margin-top:20px">
+        <img style="margin-left: 24px;" src="http://localhost:1000/images/folder.png">
+        <p style="margin-left: 16px;">Medical</p>
+        <p style="margin-top: -20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Report</p>
+
+    </div>
+
+    <div style="width: auto; padding-left:12px; margin-top:20px">
+        <img style="margin-left: 24px;" src="http://localhost:1000/images/folder.png">
+        <p style="margin-left: 24px;">Clinic</p>
+        <p style="margin-top: -20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Report</p>
+    </div>
+</div>
+
+
+
+
+<nav class="navbar navbar-expand-sm navbar-windows fixed-bottom" style="background: rgba( 0, 7, 199, 0.25 ) !important;
+box-shadow: 0 8px 32px 0 rgba(2, 10, 128, 0.527)  !important;
+backdrop-filter: blur( 4.5px )  !important;
+-webkit-backdrop-filter: blur( 4.5px )  !important;
+border-radius: 0px ;
+border: 1px solid rgba(255, 255, 255, 0.336)  !important; border: 1px solid rgba( 255, 255, 255, 0.18 );">
+    <div class="dropup" style="margin-left: 12px; margin-right:12px; font-size:20px">
+       
+        <a href="#" data-bs-toggle="dropdown">
+         <img src="http://localhost:1000/images/wind.png"> &nbsp; &nbsp; <span style="color:white">{{user.name}} &nbsp; &nbsp;</i>
+        </a>|&nbsp;&nbsp;
+
+    </div>
+ <a href="#" onclick="login()" data-toggle="tooltip" title="Login"><img src="http://localhost:1000/images/login.png"></a> &nbsp; &nbsp; &nbsp;
+    <a href="#" onclick="changePassword()" data-toggle="tooltip" title="Forget Password"> <img src="http://localhost:1000/images/cpw.png"> </a>&nbsp; &nbsp; &nbsp;
+    <a href="#" onclick="resetPassword()" data-toggle="tooltip" title="Reset Password"> <img src="http://localhost:1000/images/pw.png"> </a>&nbsp; &nbsp; &nbsp;
+    <a href="#" onclick="changeEmail()" data-toggle="tooltip" title="Reset Email"><img src="http://localhost:1000/images/mail.png"></a>&nbsp; &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+</nav>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+    <script>
+const d = new Date();
+y = d.getFullYear();
+m = d.getMonth() + 1
+day = d.getDate();
+document.getElementById("currentDate").innerHTML = y + ' - ' + m + ' - ' +day
+document.getElementById("currentDate").style.fontSize = '20px' 
+</script>
+
+

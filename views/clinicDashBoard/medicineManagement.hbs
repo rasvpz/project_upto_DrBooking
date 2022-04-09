@@ -1,0 +1,34 @@
+<h1>Medicine management {{this.fetchedclinicName}}</h1>
+<form method="POST" action="/clinicDashBoard/addMedicine">
+<input type="text" value="{{this.fetchedclinicName}}" name="clinicName">
+    <select id="dep" name="department">
+    <option >Select Department</option>  
+    {{#each department}}
+        <option value="{{this.department}}">{{this.department}}</option>    
+    {{/each}}
+</select>
+
+<select id="dep" name="type">
+<option >Select Type</option>  
+<option value="Tablets">Tablets</option>
+<option value="Pills">Pills</option>
+<option value="Syrups">Syrups</option>
+<option value="Injections">Injections</option>
+<option value="Ointments">Ointments</option>
+<option value="Balms">Balms</option>
+<option value="Packets">Packets</option>
+<option value="Others">Others</option>
+</select>    
+
+<select id="cmp" name="companyName">
+<option >Select Company</option>  
+{{#each company}}
+<option value="{{this.companyName}}">{{this.companyName}}</option>
+{{/each}}
+</select>    <br>
+
+    <input type="text" name="itemName" placeholder="TabletName">
+    <input type="text" name="itemQty" placeholder="TabletQty">
+    <input type="text" name="itemRate" placeholder="TabletRate">
+    <input type="submit">
+</form>

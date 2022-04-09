@@ -1,50 +1,200 @@
-<h1>Please Confirm Your Booking</h1>
+<style>
+    td{
+        font-size: 14px !important;
+    }
+    table{
+        border: 1px solid white !important;
+    }
+</style>
+
+<div>
+        <div style="width: auto; padding-left:12px; margin-top:50px">
+        <img style="margin-left: 24px;" src="http://localhost:1000/images/folder.png">
+        <p style="margin-left: 12px;">Bookings</p>
+        <p style="margin-top: -20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Details</p>
+    </div>
+
+    <div style="width: auto; padding-left:12px; margin-top:20px">
+        <img style="margin-left: 24px;" src="http://localhost:1000/images/folder.png">
+        <p style="margin-left: 11px;">&nbsp;&nbsp;History</p>
+    </div>
+
+    <div style="width: auto; padding-left:12px; margin-top:20px">
+        <img style="margin-left: 24px;" src="http://localhost:1000/images/folder.png">
+        <p style="margin-left: 16px;">Medical</p>
+        <p style="margin-top: -20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Report</p>
+
+    </div>
+
+    <div style="width: auto; padding-left:12px; margin-top:20px">
+        <img style="margin-left: 24px;" src="http://localhost:1000/images/folder.png">
+        <p style="margin-left: 24px;">Clinic</p>
+        <p style="margin-top: -20px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Report</p>
+    </div>
+</div>
 
 
+<nav class="navbar navbar-expand-sm navbar-windows fixed-bottom">
+    <div class="dropup" style="margin-left: 12px; margin-right:12px; font-size:20px">
+       
+        <a href="#" data-bs-toggle="dropdown">
+            <i class="fa fa-windows" style="color:black">&nbsp; &nbsp;{{user.name}} &nbsp; &nbsp;|&nbsp;&nbsp;</i>
+        </a>
 
-<table width="50%">
-    <tr>
-        <td>
-            <table width="100%" border="0">
-                <tr bgcolor='#D9D9D6'>
-                    <td style="padding: 8px;" valign="top">TOKEN NO : SEND SOON</td>
-                    <td style="padding: 8px;" align="center"><h2>BOOKING SLIP</h2> <div style="margin-top: -20px;"> {{data.newName}}, {{data.panchayath}} </div></td>
-                    <td style="padding: 8px;" valign="top" align="right">DATE : {{data.bookingDate}}</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <table width="100%" bgcolor="#D9D9D6" border="1">
+    </div>
+    <a href="#" onclick="changePassword()" data-toggle="tooltip" title="Forget Password"><i id="forgPw" class='fas fa-lock' style="color: black;"></i></a>&nbsp; &nbsp; &nbsp;
+    <a href="#" onclick="resetPassword()" data-toggle="tooltip" title="Reset Password"><i class='fas fa-key' style="color: black;"></i></a>&nbsp; &nbsp; &nbsp;
+    <a href="#" onclick="changeEmail()" data-toggle="tooltip" title="Reset Email"><i class='fas fa-envelope-open' style="color: black;"></i></a>&nbsp;
+    &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+</nav>
+
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog" data-aos="flip-left">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <table width="100%">
+              <tr>
+                  <td><h4 class="modal-title"><b>Confirm Booking</b></h4></td>
+                  <td align="right"><b>Token : Send soon</b></td>
+              </tr>
+          </table>
+        </div>
+        <div class="modal-body">
+
+            <table class="table table-bordered" width="100%">
                 <tr>
-                    <td>
-                        <p>Doctor : {{data.doctorName}}</p>
-                        <p>Departmrnt : {{data.department}}</p>
-                        <p>Fees : {{data.fees}}</p>                    
-                    </td>
-                    <td>
-                        <p>Patient : {{data.name}}</p>
-                        <p>Address : {{data.address}}</p>
-                        <p>Place : {{data.panchayath}}</p>
-                        <p>Contact : {{data.whatsapp}}</p>          
-                    </td>
+                    <td colspan="2"> 
+                        <table width="100%">
+                            <tr>
+                                <td width="75%"><h5 style="background-color: black; color:white; width:75%;padding:2px">&nbsp;{{data.newName}} {{data.panchayath}}</h5></td>
+                                <td width="25%" align="right"> <span style="background-color: black; color:white; padding:4px"> {{data.bookingDate}} </span></td>
+                            </tr>
+                        </table>
+                    </td>                   
+                </tr>
+                <tr> 
+                    <td>{{data.doctorName}}</td>
+                    <td>Patient : {{data.name}}</td>
+                </tr>
+                  <tr > 
+                    <td>Dr Fees : 500 {{data.fees}}</td>
+                    <td>Address : {{data.address}}</td>
+                </tr>
+                    <tr > 
+                    <td>DEPT : {{data.department}}</td>
+                    <td>Place : {{data.panchayath}} {{data.whatsapp}} </td>
                 </tr>
             </table>
-        </td>
-    </tr>
-    <tr>
-                <td>
-            <table bgcolor='#D9D9D6' width="100%">
-                <tr>
-                    <td  style="padding-top: 8px;"> <h4> Consulting Time : {{data.consultingTime}} </h4></td>
-                    <td  style="padding-top: 8px;" align="right" valign="top"> <input type="button" value="CANCEL">&nbsp;&nbsp; <input type="submit" value="PAY ONLINE"> </td>
-                </tr>
-            </table>
-           </td>
-    </tr>
-        <tr>
+
+ Consulting Time : {{data.consultingTime}} 
+        </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button> <input class="btn btn-info" onclick="payment('500','{{data.whatsapp}}','{{data.bookingTime}}')" type="button" value="PAY ONLINE"> 
+      </div>
 
 
-    </tr>
-</table>
+      </div>
+      
+    </div>
+  </div> 
+<script>
+$(document).ready(function(){
+  $("#myModal").modal("show");
+    
+  $("#myBtn").click(function(){
+    $("#myModal").modal("hide");
+  });
+
+});
+</script>
+
+
+
+ <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+    function payment(fees,contact,bookingTime){
+        
+         $.ajax({
+            url:'/payment',
+            data:{
+                fees,
+                contact,
+                bookingTime, 
+            },
+            method:'post',
+            success:(resp)=>{
+                if(resp.status){
+                 
+                    razorpay(resp.response,bookingTime);
+                }
+                else{
+                  
+                    location.href = '/'
+                }
+            }
+         })
+    }
+    
+    function razorpay(order,bookingTime){
+        
+        var options = {
+            "key": "rzp_test_nUVcKdOUWrUXIZ", // Enter the Key ID generated from the Dashboard
+            "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Rash",
+            "description": "Test Transaction",
+            "image": "https://example.com/your_logo",
+            //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response){
+                verifyPayment(response,order,bookingTime);
+            },
+            "prefill": {
+                "name": "Outfits",
+                "email": "gaurav.kumar@example.com",
+                "contact": "9999999999"
+            },
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+    };
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+    }
+
+     function verifyPayment(payment,order,bookingTime){
+        $.ajax({
+            url:'/verify-payment',
+            data:{
+                bookingTime,
+                payment,
+                order
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                    location.href = '/bookedSuccessfully';
+                }
+                else{
+                    location.href = '/'
+                }
+            }          
+        })
+    }
+
+
+
+    </script>

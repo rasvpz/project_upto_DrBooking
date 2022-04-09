@@ -1,0 +1,21 @@
+<h1>Welcome to the edit pages</h1>
+
+{{this.clinicName}}
+{{this.doctorName}}
+{{this.degreee}}
+{{this.department:}}
+{{this.consultingTime}}
+{{this.contact}}
+{{this.password}}
+
+<form method="POST" action="/clinicDashBoard/updateClinicDoctors">
+<input type="text" name="id" value="{{this._id}}" style="display: none;">
+<input type="text" name="clinicName" value="{{this.clinicName}}">
+<input type="text" name="doctorName" value="{{this.doctorName}}">
+<input type="text" name="degreee" value="{{this.degreee}}">
+<input type="text" name="department" value="{{this.department}}">
+<input type="text" name="consultingTime" value="{{this.consultingTime}}">
+<input type="text" name="contact" value="{{this.contact}}">
+<input type="text" name="password" value="{{this.password}}">
+<input type="submit" value="UPDATE">
+</form>

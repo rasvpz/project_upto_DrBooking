@@ -1,15 +1,59 @@
 <html>
 <head>
   <title></title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+   <meta charset="utf-8">
+   <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
 
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ <script>
+            // On page load, parse user pool tokens from the URL
+            window.onload = function() {
+                tokens = getToken();
+                // Display tokens
+                if (tokens) {
+                    document.getElementById('id_token').value = tokens.id_token;
+                    document.getElementById('access_token').value = tokens.access_token;
+                }
+            }
+
+            // Parses the URL parameters and returns an object
+            function parseParms(str) {
+                var pieces = str.split("&"), data = {}, i, parts;
+                for (i = 0; i < pieces.length; i++) {
+                    parts = pieces[i].split("=");
+                    if (parts.length < 2) {
+                        parts.push("");
+                    }
+                    data[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
+                }
+                return data;
+            }
+
+            // Returns the token from the URL hash
+            function getToken() {
+                hash = parseParms(document.location.hash.substring(1));
+                return hash;
+            }
+        </script>
   
 </head>
 
-<body>
+<body   onload="enableEditMode();">
   {{{body}}}
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/javascripts/ajax.js"></script>
+
 </html>
 
