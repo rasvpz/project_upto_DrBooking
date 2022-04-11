@@ -63,7 +63,6 @@ router.get('/addMuncipalites', function(req, res, next) {
 router.get('/fetchPanchayaths', function(req, res, next) {  
   superAdminHelper.fetchPanchayaths(req.body).then((response)=>{
     let munc = response.muncRespo
-    console.log('------------------------------------------------', munc)
     let panchayath = response.punchRespo
     res.render('superAdminPages/addPanchayaths', {panchayath, munc})
   }) 
@@ -75,10 +74,18 @@ router.get('/addPanchayaths', function(req, res, next) {
   res.render('superAdminPages/addPanchayaths')
  });
 
- router.post('/addPanchayaths', function(req, res, next) {  
+ router.post('/addPanchayaths', function(req, res, next) { 
+   
+   if(req.body.panchayath == '')
+   {
+    res.redirect('/superAdmin/fetchPanchayaths')
+   }
+   else{
   superAdminHelper.addPanchayaths(req.body).then((response)=>{
     res.redirect('/superAdmin/fetchPanchayaths')
+ 
   }) 
+}
  });
 
  router.get("/deletePanchayath/:id", function (req, res, next) {
@@ -89,8 +96,10 @@ router.get('/addPanchayaths', function(req, res, next) {
 });
 
 router.get('/addClinics', async function(req, res, next) {
-  let result= await superAdminHelper.fetchClinics()
-  res.render('superAdminPages/addClinics', {result})
+  superAdminHelper.fetchClinics().then(({clinicRespo,punchayathRespo})=>{
+    console.log("my pppppaaaaaaaaaaaaaaaaaaanchayath", clinicRespo)
+    res.render('superAdminPages/addClinics', {clinicRespo,punchayathRespo})
+   }) 
 })  
 
 router.post('/addClinic', function(req, res, next) {  

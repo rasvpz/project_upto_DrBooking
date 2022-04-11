@@ -180,7 +180,7 @@ productHelpers.prescribedDrugs(req.body).then((status)=>{
 router.post('/paymentPrescription',(req,res)=>{
   let total = req.body.amount;
   let orderId = req.session.sub;
-  
+  console.log('immmmmmmmmmmmmmmmmmmmmmmmm herrrrrrrrrrrrrrrrrrrrrr');
   productHelpers.generateRazorpay(orderId,total).then((response)=>{
     console.log("-----------",response)
     res.json({status:true,response})

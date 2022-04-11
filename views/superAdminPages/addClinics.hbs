@@ -1,14 +1,10 @@
 		<form action="/superAdmin/addClinic" method="POST">
         			<select name="pachayath">
 					   <option name="" value="">Select Panchayaths</option>
-						<option name="Koppam" value="Koppam">Koppam</option>
-						<option name="Kulukkallur" value="Kulukkallur">Kulukkallur</option>
-						<option name="Muthuthala" value="Muthuthala">Muthuthala</option>
-						<option name="Ongallur" value="Ongallur">Ongallur</option>
-						<option name="Pattambi" value="Pattambi">Pattambi</option>
-						<option name="Thiruvegapura" value="Thiruvegapura">Thiruvegapura</option>
-						<option name="Vallapuzha" value="Vallapuzha">Vallapuzha</option>
-                        <option name="Vilayur  " value="Vilayur  ">Vilayur  </option>
+						{{#each punchayathRespo}}
+						<option name="{{this.panchayath}}" value="{{this.panchayath}}">{{this.panchayath}}</option>
+						{{/each}}
+
 					</select> <br>     			
                         <input type="text" name="clinicName" placeholder="clinicName"><br>
                         <input type="text" name="place"  placeholder="place"><br>
@@ -20,7 +16,7 @@
 		<input type="submit" value="ADD">&nbsp;&nbsp;&nbsp; <a href="/superAdmin" type="button">Close</button><br>	<br>
         </form>
 		<table>
-			{{#each result}}
+			{{#each clinicRespo}}
 			<tr>
 				<td>{{this.myClinicId}}</td>
 				 <td>{{this.clinicName}}</td>

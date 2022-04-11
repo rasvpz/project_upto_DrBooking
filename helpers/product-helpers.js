@@ -173,12 +173,10 @@ module.exports = {
                 var myDate  =  d.getFullYear() + "-" + myMonth + "-" + mycDate 
                 
                 let checkItsExist = await db.get().collection('bigOUserBookingDetails').find({bookingDate:myDate}).count()
-                console.log('Hi im hereeeeeeeeeeeeeeeeeeeeeeeeeeee', checkItsExist);  
                 if(checkItsExist == 1)                
                 {
 
                     let lastBooking = await db.get().collection('bigOUserBookingDetails').find({status:"Not-Confirmed"}).sort({_id:-1}).limit(1).toArray()
-                    console.log('laaaaaaaaaaaaaaaaaaaaaaaaaaast', lastBooking)
                     var newToken = lastBooking[0].token
                     var currentBookingTime =  lastBooking[0].consultingTime
                     var elseBookingTime = lastBooking[0].bookingTime
@@ -336,15 +334,17 @@ module.exports = {
     
     prescribedDrugs:(res)=>{
         return new Promise (async(resolve, reject)=>{
-            console.log('ooooooooooooooooooooooooooo',res);
            let data = await db.get().collection('bigOUserBookingDetails').updateOne({bookingTime:res.bTime, cognitoId: res.cognitoId}, {$set : {consultingTime:res.bTime+01}})
                resolve(data)                
            })
 },
 
 updatePaymentStatus:(id)=>{
-    return new Promise ((resolve,reject)=>{
-        db.get().collection('bigOprescription').updateOne({patientCogId:id},{$set:{status:'Paid'}}).then(()=>{
+    return new Promise (async(resolve,reject)=>{
+        let data = await db.get().collection('bigOprescription').findOne({patientCogId:id, status:'processing'})        
+        let myId = data._id
+        console.log(myId,'sdhflkjsdhgfhseruigtfeuirytiuwyeriutyeiurytiuew')
+       await db.get().collection('bigOprescription').updateOne({ _id:ObjectId(myId) },{$set:{status:'Paid'}}).then(()=>{
             console.log("sucess===========");
             resolve();
         })

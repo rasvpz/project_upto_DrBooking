@@ -203,7 +203,10 @@ deletepachayath: (myID)=>{
 fetchClinics: ()=>{
    return new Promise (async(resolve, reject)=>{
       db.get().collection('bogOclinicsInPanchayath').find().toArray().then((clinicRespo) =>{ 
-      resolve(clinicRespo)
+      db.get().collection('bigOPanchayath').find().toArray().then((punchayathRespo) =>{ 
+         console.log('puuuuunchaytah bbbbbbbbbbbbb', punchayathRespo)
+      resolve({clinicRespo,punchayathRespo})
+   }) 
    }) 
    })
 }, 

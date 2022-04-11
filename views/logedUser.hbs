@@ -877,7 +877,8 @@ document.getElementById('decrementTime').innerHTML = diff
 <script>
 
     function payment1(amount){
-      
+        alert('amount')
+        alert(amount)
          $.ajax({
              
             url:'/paymentPrescription',
@@ -938,8 +939,7 @@ document.getElementById('decrementTime').innerHTML = diff
             },
             method:'post',
             success:(response)=>{
-                if(response.status){
-                    
+                if(response.status){                    
                     location.href = '/paymentSuccessful';
                 }
                 else{

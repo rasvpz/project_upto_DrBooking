@@ -27,8 +27,9 @@ module.exports = {
 
      }
      var myDate  =  d.getFullYear() + "-" + myMonth + "-" + mycDate
-    const bookingData = await db.get().collection("bigOUserBookingDetails").find({ bookingDate: myDate, department:data.department}).toArray();
-     // const patientHistory = await db.get().collection("bigOUsersHistory").findOne({cognitoId:'d74b3afe-ca19-4f57-b818-589e5736e4d1'});
+    const bookingData = await db.get().collection("bigOUserBookingDetails").findOne({ bookingDate: myDate, cognitoId:loginDate.cognitoId});
+     console.log('DAAAAAAAAAAAAAAAAAAAAAAAAA', bookingData);
+    // const patientHistory = await db.get().collection("bigOUsersHistory").findOne({cognitoId:'d74b3afe-ca19-4f57-b818-589e5736e4d1'});
     const tablets = await db.get().collection("bigOMedicines").find({type:"Tablets", department:data.department}).toArray();
     const pills = await db.get().collection("bigOMedicines").find({type:"Pills", department:data.department}).toArray();
     const syrups = await db.get().collection("bigOMedicines").find({type:"Syrups", department:data.department}).toArray();
@@ -38,6 +39,31 @@ module.exports = {
     const packets = await db.get().collection("bigOMedicines").find({type:"Packets", department:data.department}).toArray();
     const others = await db.get().collection("bigOMedicines").find({type:"Others", department:data.department}).toArray();
     resolve({data,bookingData,tablets,pills,syrups,injection,ointments,balms,packets,others})
+    })
+  },
+
+
+  doctorsLoginFetchAllPatients: async(loginDate) => {
+    console.log('fhdfh fdh sdfhgfhfghfdghfghdf', loginDate)
+    return new Promise(async(resolve, reject)=>{
+    const data = await db.get().collection("bigODoctorsInClinics").findOne({ contact: loginDate.contact, password: loginDate.password });
+    var d = new Date()
+    var mycDate = d.getDate()
+
+    const thisMonth = d.getMonth() + 1
+    var myMonth
+
+    if(thisMonth < 10){
+        myMonth = '0' + thisMonth
+    }
+
+    if(mycDate < 10){  
+      mycDate = '0' + mycDate        
+
+     }
+     var myDate  =  d.getFullYear() + "-" + myMonth + "-" + mycDate
+    const bookingData = await db.get().collection("bigOUserBookingDetails").find({ bookingDate: myDate, department:data.department}).toArray();
+    resolve({data,bookingData})
     })
   },
 

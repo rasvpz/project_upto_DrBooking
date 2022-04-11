@@ -24,9 +24,9 @@
                     </td>
 
                     <td width="25%" style="color: black; background-color:red">
-                        {{#each bookingData}}
-                            <a  href="/doctorsDashBoard/treatMentDetails/{{this.cognitoId}}">{{this.name}}</a><br><font size="2">Consultaion - {{this.consultingTime}}</font><hr>
-						{{/each}}
+                       
+                            <a  href="/doctorsDashBoard/treatMentDetails/{{bookingData.cognitoId}}">{{bookingData.name}}</a><br><font size="2">Consultaion - {{bookingData.consultingTime}}</font><hr>
+						
                     </td>
                 </tr>
 
@@ -40,12 +40,12 @@
 						<input type='text' id="drDept" name="drDept" value="{{data.department}}" hidden>
 						<input type='text' id="clinic" name="clinic" value="{{data.clinicName}}" hidden>					 
 
-						{{#each bookingData}}
 						
-							<input name="myPatient" id="cognitoId" type="text" value="{{this.cognitoId}}" hidden>
-							<input name="patientCognitoId" id="name" type="text" value="{{this.name}}" hidden>
-							<input name="whatsapp" id="whatsapp" type="text" value="{{this.whatsapp}}" hidden>
-						{{/each}}
+						
+							<input name="myPatient" id="cognitoId" type="text" value="{{bookingData.cognitoId}}" hidden>
+							<input name="patientCognitoId" id="name" type="text" value="{{bookingData.name}}" hidden>
+							<input name="whatsapp" id="whatsapp" type="text" value="{{bookingData.whatsapp}}" hidden>
+					
                             <span style="border: 1px solid white; padding:4px" hidden>								
 {{!-- hiiden tablets details atart here --}}
 								<select id="myTabQty" name="qty">

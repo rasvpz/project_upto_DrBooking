@@ -9,16 +9,16 @@
 
 
 				   <select name="panchayath" id="output" onchange="random_function1()">
-					   <option name="" value="">Select Panchayaths</option>
+					   <option id="myOutmpu" name="" value="">Select Panchayaths</option>
 					</select>
 			
 		  <input type="submit" value="ADD">&nbsp;&nbsp;&nbsp;
-          <a href="/superAdmin" type="button">Close</button>
+          <a href="/superAdmin" type="button">Close</a>
         </form>
 		<table>
 			{{#each panchayath}}
 			<tr>
-				<td>{{this.myPanchayathId}}</td> <td>{{this.panchayath}}</td>  <td><a onclick="return confirm('Are you sure, you want to delete it?')" href="/superAdmin/deletePanchayath/{{this._id}}">delete</a></td>
+				<td></td> <td>{{this.panchayath}}</td>  <td><a onclick="return confirm('Are you sure, you want to delete it?')" href="/superAdmin/deletePanchayath/{{this._id}}">delete</a></td>
 			</tr>
 			{{/each}}
 		</table>
@@ -88,6 +88,11 @@ function random_function()
 				else if(muncipality=="Paravoor")
                 {
                     var arr=['']
+                }
+                else{
+                                          
+                     document.getElementById("output").innerHTML= "<option name='' value=''>Panchayath Not Added</option>";
+                     document.getElementById("output").style.width = "200px";
                 }			
 
                 var string="";

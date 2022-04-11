@@ -23,11 +23,11 @@ router.get("/", async function (req, res, next) {
     res.render("doctorsDashBoard/doctorsLogin");
 });
 
-router.post("/doctorsLogin", async function (req, res, next) {
+router.post("/doctorsLoginFetchAllPatients", async function (req, res, next) {
       console.log('--------*****LOGIN******-----------', req.body);
-    await doctorHelper.doctorsLogin(req.body).then(({data,bookingData,tablets,pills,syrups,injection,ointments,balms,packets,others}) => {
+    await doctorHelper.doctorsLoginFetchAllPatients(req.body).then(({data,bookingData}) => {
         if(data){           
-             res.render("doctorsDashBoard/doctorsBookingPanel", {data, bookingData,tablets,pills,syrups,injection,ointments,balms,packets,others});
+             res.render("doctorsDashBoard/doctorsBookingPanel", {data, bookingData});
         }else{
             res.redirect('/doctorsDashBoard')
         } 
