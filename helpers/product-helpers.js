@@ -64,6 +64,15 @@ module.exports = {
                         let data = await db.get().collection('bigOUserBookingDetails').findOne({whatsapp:whatsapp, cognitoId: session.sub})
                         let data2 = await db.get().collection('bigOUserBookingDetails').find().sort({_id:-1}).limit(1).toArray()
                         let result = await db.get().collection('bigOprescription').findOne({patientCogId: session.sub, status:'processing'})
+                         // console.log('oooooooooooooooooooooo', bookings)
+                        // var bookingMessage = ''
+                        // if(bookings[0]){
+                        //     bookingMessage = 1
+                        // }
+                        // else{
+                        //     bookingMessage = 0                            
+                        // }
+                        // console.log('oooooooooooooooooooooo', bookingMessage)
                          resolve({myClinic, bookings, data2, data, result})    
                     })
                 })
@@ -189,7 +198,8 @@ module.exports = {
                           {  status : "Booked",
                              consultingTime: bookingTime,
                              token : 10,
-                             cognitoId:cognitoId
+                             cognitoId:cognitoId,
+                             consultation:'pending'
                             
                           }
                          })
@@ -253,7 +263,8 @@ module.exports = {
                                 {  status : "Booked",
                                     consultingTime: consultingTime,
                                     token : newToken+1,
-                                    cognitoId:cognitoId
+                                    cognitoId:cognitoId,
+                                    consultation:'pending'
                                 }
                                 })
                             .then((bookingRespo) =>{ 
@@ -297,7 +308,8 @@ module.exports = {
                                     {  status : "Booked",
                                         consultingTime: consultingTime,
                                         token : newToken+1,
-                                        cognitoId:cognitoId
+                                        cognitoId:cognitoId,
+                                        consultation:'pending'
                                     }
                                     })
                                 .then((bookingRespo) =>{ 
@@ -343,9 +355,8 @@ updatePaymentStatus:(id)=>{
     return new Promise (async(resolve,reject)=>{
         let data = await db.get().collection('bigOprescription').findOne({patientCogId:id, status:'processing'})        
         let myId = data._id
-        console.log(myId,'sdhflkjsdhgfhseruigtfeuirytiuwyeriutyeiurytiuew')
        await db.get().collection('bigOprescription').updateOne({ _id:ObjectId(myId) },{$set:{status:'Paid'}}).then(()=>{
-            console.log("sucess===========");
+          console.log("sucess===========");
             resolve();
         })
     })

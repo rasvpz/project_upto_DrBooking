@@ -321,7 +321,6 @@ router.get("/bookings/:doctorName/:department/:newName/:name/:address/:panchayat
 //razorpay
 router.get('/paymentSuccessful',(req,res)=>{
   let id = req.session.sub;
-  console.log("hereee");
   productHelpers.updatePaymentStatus(id).then((status)=>{ 
     // bcs status coming like array
     res.redirect("/login");

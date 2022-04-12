@@ -24,7 +24,7 @@ router.get("/", async function (req, res, next) {
 });
 
 router.post("/doctorsLoginFetchAllPatients", async function (req, res, next) {
-      console.log('--------*****LOGIN******-----------', req.body);
+      
     await doctorHelper.doctorsLoginFetchAllPatients(req.body).then(({data,bookingData}) => {
         if(data){           
              res.render("doctorsDashBoard/doctorsBookingPanel", {data, bookingData});

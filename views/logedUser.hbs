@@ -764,14 +764,14 @@ function myClose(){
  
 
 
-        const startingHour = hoursStr
-        const startingMinutes = minutesStr
+        var startingHour = hoursStr
+        var startingMinutes = minutesStr
         let time = startingMinutes * 60
  
             var countdownEl = document.getElementById("decrementTime")
-             
+            
          
-         setInterval(updateCountDown, 1000)
+setInterval(updateCountDown, 1000)
 
 function updateCountDown() {
 
@@ -780,6 +780,8 @@ var chr = d.getHours();
 var cmin = d.getMinutes();
 var csec = d.getSeconds();
 var cTime = chr+":"+cmin+":"+csec
+
+
 var cBooking = document.getElementById("bbkTimewithoutDate").value
 
             let minutes = Math.floor(time / 60)
@@ -804,16 +806,29 @@ var cBooking = document.getElementById("bbkTimewithoutDate").value
                     speechSynthesis.speak(speech) 
 
             }
-            else{
+            else{               
                 countdownEl.innerHTML = `${startingHour} : ${minutes} : <sup>${seconds}</sup>`
                 time--
-            }            
+                
+            }          
         }
 
+            var a = startingHour;
+            var res = isNaN(a)
+            if( res == true){
+                setInterval(updateCountDown1, 90000000000000)
+                function updateCountDown1() {
+                    document.getElementById("decrementTime").innerHTML = '<h3>Please check <br> the prescription</h3>'                      
 
-        {{!-- document.getElementById("decrementTime").innerHTML = daysStr + " days, " + hoursStr + ":" + minutesStr + ":" + secondsStr; --}}
+                    
+                        }
+
+            }
+
     }
+  
  func()
+
 </script>
 
 
@@ -859,18 +874,6 @@ var cognitoId = document.getElementById('cognitoId').value
 
 </script>
 
-{{!-- <script>
-    
-   var bTime = document.getElementById('bbkTime').innerHTML
-   var cTime =  document.getElementById('conTime').innerHTML
-
-var d1 = bTime //"now"
-var d2 = cTime // some date
-alert(d1)
-var diff = Math.abs(d1-d2);  // difference in milliseconds
-document.getElementById('decrementTime').innerHTML = diff
-
-</script> --}}
 
  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 

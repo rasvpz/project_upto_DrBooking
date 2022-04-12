@@ -28,7 +28,6 @@ module.exports = {
      }
      var myDate  =  d.getFullYear() + "-" + myMonth + "-" + mycDate
     const bookingData = await db.get().collection("bigOUserBookingDetails").findOne({ bookingDate: myDate, cognitoId:loginDate.cognitoId});
-     console.log('DAAAAAAAAAAAAAAAAAAAAAAAAA', bookingData);
     // const patientHistory = await db.get().collection("bigOUsersHistory").findOne({cognitoId:'d74b3afe-ca19-4f57-b818-589e5736e4d1'});
     const tablets = await db.get().collection("bigOMedicines").find({type:"Tablets", department:data.department}).toArray();
     const pills = await db.get().collection("bigOMedicines").find({type:"Pills", department:data.department}).toArray();
@@ -44,7 +43,6 @@ module.exports = {
 
 
   doctorsLoginFetchAllPatients: async(loginDate) => {
-    console.log('fhdfh fdh sdfhgfhfghfdghfghdf', loginDate)
     return new Promise(async(resolve, reject)=>{
     const data = await db.get().collection("bigODoctorsInClinics").findOne({ contact: loginDate.contact, password: loginDate.password });
     var d = new Date()
@@ -62,9 +60,29 @@ module.exports = {
 
      }
      var myDate  =  d.getFullYear() + "-" + myMonth + "-" + mycDate
-    const bookingData = await db.get().collection("bigOUserBookingDetails").find({ bookingDate: myDate, department:data.department}).toArray();
+    const bookingData = await db.get().collection("bigOUserBookingDetails").find({ bookingDate: myDate, department:data.department, consultation:'pending'}).toArray();
     resolve({data,bookingData})
-    })
+  //   const bookingData = await db.get().collection("bigOprescription").aggregate([
+  //     {
+  //     $match:{status:"Paid"}
+  //   },
+  //   {
+  //     $project:{patientCogId:1,status:1}
+  //   },
+  //   {
+  //     $lookup:{        
+  //       from:"bigOUserBookingDetails",
+  //       localField:"patientCogId",
+  //       foreignField:"cognitoId",
+  //       as:"Details"
+  //     }
+  //   },
+  //  { $unwind:"$Details"}
+  // ]).toArray()
+  //   console.log(bookingData,"==============================================");
+  //   resolve({data,bookingData})
+
+ })
   },
 
   patientHistory: async(history) => {
@@ -124,7 +142,8 @@ module.exports = {
     data.status = 'processing'
     return new Promise((res,rej)=>{
       try {       
-        db.get().collection('bigOprescription').insertOne(data).then((result)=>{
+        db.get().collection('bigOprescription').insertOne(data).then(async(result)=>{
+          const updateConsultation =  await db.get().collection('bigOUserBookingDetails').updateOne({whatsapp:data.whatsapp, bookingDate:data.date, department:data.drDept, doctorName:data.drName},{$set:{consultation:'ok'}})
           res(result)
         })
       } catch (error) {
