@@ -4,10 +4,9 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "start": "nodemon ./bin/www", 
+    "start": "nodemon ./bin/www",
     "dev": "nodemon ./bin/www -e hbs,js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install"
-
   },
   "dependencies": {
     "amazon-cognito-identity-js": "^5.2.6",
@@ -30,6 +29,7 @@
     "mongo-db": "^1.0.2",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.15",
     "objectid": "^3.2.1",
     "path": "^0.12.7",
     "razorpay": "^2.8.0",
