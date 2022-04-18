@@ -2,7 +2,7 @@
   "name": "projectpractice",
   "version": "0.0.0",
   "private": true,
-  "main": "app.js",
+  "module": "module",
   "scripts": {
     "start": "node ./bin/www",
     "start:dev":"nodemon ./bin/www",
