@@ -329,7 +329,7 @@ router.get("/bookings/:doctorName/:contact/:department/:newName/:name/:address/:
       const bookingTime = `${dubbleZero + time.getHours()}:${dubbleZero + time.getMinutes()
          }:${dubbleZero + time.getSeconds()}`;
          timeOfDay = bookingTime
-         if (timeOfDay <= '18:00')
+         if (timeOfDay >= '00:00' && timeOfDay <= '18:00')
            {
                console.log('*************************************** Inside time frame')
                req.params.token = "Notify after booking";

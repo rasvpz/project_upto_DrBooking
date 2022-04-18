@@ -124,6 +124,7 @@ $(document).ready(function(){
 <script>
 
     function payment(fees,contact,bookingTime){
+        alert("HELLO",bookingTime)
         
          $.ajax({
             url:'/payment',
@@ -176,6 +177,7 @@ $(document).ready(function(){
     }
 
      function verifyPayment(payment,order,bookingTime){
+         alert("verifyPayment", bookingTime)
         $.ajax({
             url:'/verify-payment',
             data:{

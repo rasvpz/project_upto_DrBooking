@@ -150,18 +150,11 @@ module.exports = {
   bookings: (bookingData, cognitoId) => {
     bookingData.cognitoId = cognitoId;
     return new Promise(async (resolve, reject) => {
-      await db
-        .get()
-        .collection("bigOUserBookingDetails")
-        .insertOne(bookingData)
-        .then(async (data) => {
+      await db.get().collection("bigOUserBookingDetails").insertOne(bookingData).then(async (data) => {
           const myID = data.insertedId;
-          await db
-            .get()
-            .collection("bigOUserBookingDetails")
-            .findOne({ _id: ObjectId(myID) })
-            .then((user) => {
-              resolve(user);
+          await db.get().collection("bigOUserBookingDetails").findOne({ _id: ObjectId(myID) }).then((user) => {
+          resolve(user);
+
             });
         });
     });
@@ -211,7 +204,14 @@ module.exports = {
         .collection("bigOUserBookingDetails")
         .find({ bookingDate: myDate })
         .count();
+
+//above time limit
+
+//above time limit ends
+
+
       if (checkItsExist == 1) {
+        console.log('hi im ========================= 1');
         let lastBooking = await db
           .get()
           .collection("bigOUserBookingDetails")
@@ -241,7 +241,30 @@ module.exports = {
           .then((bookingRespo) => {
             resolve(bookingRespo);
           });
-      } else {
+      }
+      
+      else if (checkItsExist == 0) {
+        await db
+        .get()
+        .collection("bigOUserBookingDetails")
+        .updateOne(
+          { whatsapp: whatsapp, bookingTime: bookingTime },
+          {
+            $set: {
+              status: "Booked",
+              consultingTime: bookingTime,
+              token: 01,
+              cognitoId: cognitoId,
+              consultation: "pending",
+            },
+          }
+        )
+        .then((bookingRespo) => {
+          resolve(bookingRespo);
+        });
+      }
+      else {
+        console.log('hi im >>>>>>>>>>>>>>>>>>> 1');
         let lastBooking = await db
           .get()
           .collection("bigOUserBookingDetails")
