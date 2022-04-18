@@ -73,9 +73,9 @@ router.post('/fetchSelectedClinicData', async function(req, res, next) {
     }
     var todayDate = year.getFullYear()+'-'+ thisMonth+'-'+thisDate;
     
-    await clinicAdminHelper.prescripedMedicine(todayDate).then((fetchedPrescription) => {     
-        var cName=fetchedPrescription[0].clinic      
-      res.render('clinicDashBoard/prescriptionAll', {fetchedPrescription, cName})
+    await clinicAdminHelper.prescripedMedicine(todayDate).then(({myPostponed, result}) => {     
+        var cName=result[0].clinic      
+      res.render('clinicDashBoard/prescriptionAll', {myPostponed, result, cName})
     }) 
   })
 

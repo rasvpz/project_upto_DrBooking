@@ -150,6 +150,50 @@ module.exports = {
         res(err)
       }     
     })   
-  }
+  },
+
+  recordingAbsent:(formData)=>{
+    return new Promise((res,rej)=>{
+      try {       
+        var d = new Date()
+        var mycDate = d.getDate()
+       const newMonth = d.getMonth() +1
+       var myMonth
+      if(newMonth < 10){
+          myMonth = '0' + newMonth
+      }
+      if(mycDate < 10){  
+       mycDate = '0' + mycDate        
+
+      }
+       var todayDate  =  d.getFullYear() + "-" + myMonth + "-" + mycDate 
+
+        var days = formData.absentDays
+        const tomorrow = (long = false) => {
+          let t = new Date();
+          t.setDate(t.getDate() + Number(days));
+          const ret = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(
+            t.getDate()
+          ).padStart(2, '0')}`;
+          return !long ? ret : `${ret}T00:00:00`;
+        };
+        var myData = tomorrow()
+        db.get().collection('bigOUserBookingDetails')
+        .updateMany( {contact:formData.contact, status:'Booked', bookingDate:todayDate, consultation:'pending'},
+          {
+             $set:
+             {  
+              bookingDate : myData,
+              postponed : days
+             }
+       })
+        .then(async(result)=>{
+          res(result)
+        })
+      } catch (error) {
+        res(err)
+      }     
+    })   
+  },
 
 }

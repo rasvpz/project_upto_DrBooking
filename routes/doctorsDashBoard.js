@@ -35,6 +35,18 @@ router.post("/doctorsLoginFetchAllPatients", async function (req, res, next) {
  
  });
 
+ router.get("/doctorsDashBoard/doctorsLoginFetchAllPatients", async function (req, res, next) {
+      
+    await doctorHelper.doctorsLoginFetchAllPatients(req.body).then(({data,bookingData}) => {
+        if(data){           
+             res.render("doctorsDashBoard/doctorsBookingPanel", {data, bookingData});
+        }else{
+            res.redirect('/doctorsDashBoard')
+        } 
+    });
+ 
+ });
+
  router.get("/treatMentDetails/:clinicName", async function (req, res, next) {
     await doctorHelper.doctorsLogin(req.body).then(({data, bookingData}) => {
         res.render("doctorsDashBoard/doctorsPanel");
@@ -56,7 +68,6 @@ router.post("/cormodityMedicine", async function (req, res, next) {
 
 
 router.get('/doctorsLogin/:cognitoId/:patientName/:whatsapp/:contact/:password',async(req,res)=>{
-   console.log('******--------------******',req.params)
    await doctorHelper.doctorsLogin(req.params).then(({data,bookingData,tablets,pills,syrups,injection,ointments,balms,packets,others}) => {
     if(data){           
          res.render("doctorsDashBoard/doctorsPanel", {data, bookingData,tablets,pills,syrups,injection,ointments,balms,packets,others});
@@ -152,4 +163,10 @@ router.post('/addPrescription',async(req,res)=>{
             res.render('')
         }
 })
+
+router.post("/recordingAbsent", async function (req, res, next) {
+    await doctorHelper.recordingAbsent(req.body).then(({data}) => {
+        res.redirect('/doctorsDashBoard')
+    });   
+});
 module.exports = router;

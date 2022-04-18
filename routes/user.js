@@ -123,10 +123,11 @@ router.get("/login", async function (req, res) {
       userData={email:email}
       let clinicAdminLogin = await userHelper
       .doLogin(userData, req.session)
-      .then(({myClinic, bookings, data2, result}) => {
+      .then(({myClinic, bookings, data2, result, messagePostponed, bookedDate}) => {
        let myStatus = data2[0]
+         console.log('*******************+++++++++++++++++++++++++++++', bookings);
        let mNAN = req.session.myNan
-       res.render("logedUser", { myClinic, bookings, myStatus, result, mNAN});
+       res.render("logedUser", { myClinic, bookings, myStatus, result,messagePostponed,bookedDate, mNAN});
       });
     },
     onFailure: (err) => {
@@ -136,36 +137,54 @@ router.get("/login", async function (req, res) {
 });
 
 router.post("/login", async function (req, res) {
-   const { email, password } = req.body;
-   const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(
-     {
-       Username: email,
-       Password: password,
-     }
-   );
-   const userDetails = {
-     Username: req.body.email,
-     Pool: userPool,
-   };
-   const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userDetails);
-   cognitoUser.authenticateUser(authenticationDetails, {
-     onSuccess: async(data) => {
-      //  console.log('^&^&^&^&^&^&^&^&^&^&&^',data)
-       req.session.sub = data.idToken.payload.sub
-       req.session.email = email
-       req.session.password = password
-       let clinicAdminLogin = await userHelper
-       .doLogin(req.body, req.session)
-       .then(({myClinic, bookings, data2}) => {
-        let myStatus = data2[0]
-       
-        res.render("logedUser", { myClinic, bookings, myStatus});
-       });
-     },
-     onFailure: (err) => {
-       res.send("Error");
-     },
-   });
+  const { email, password } = req.body;
+  const authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(
+    {
+      Username: email,
+      Password: password,
+    }
+  );
+  const userDetails = {
+    Username: req.body.email,
+    Pool: userPool,
+  };
+  const cognitoUser = new AmazonCognitoIdentity.CognitoUser(userDetails);
+  cognitoUser.authenticateUser(authenticationDetails, {
+    onSuccess: async(data) => {
+     //  console.log('^&^&^&^&^&^&^&^&^&^&&^',data)
+     
+      req.session.sub = data.idToken.payload.sub
+      req.session.email = email
+      req.session.password = password
+      let clinicAdminLogin = await userHelper
+      .doLogin(req.body, req.session)
+      .then(({myClinic, bookings, data2,myDate, dateFetchingForCompare}) => {
+       let myStatus = data2[0]
+     
+        if(dateFetchingForCompare[0]){
+          var myBookingDate = dateFetchingForCompare[0].bookingDate
+          var specificDate = new Date(myBookingDate);
+          var current_date = new Date(myDate);
+          console.log(specificDate)
+          console.log(current_date)
+          
+                if(current_date.getTime() < specificDate.getTime()){
+                  var myBooking = true
+                  console.log(myBooking)
+                }
+        }
+        else if(!dateFetchingForCompare[0]){
+          dateFetchingForCompare = 'no data to show'
+        }
+
+      
+       res.render("logedUser", { myClinic, bookings, myStatus, dateFetchingForCompare, specificDate, myBooking});
+      });
+    },
+    onFailure: (err) => {
+      res.send("Error");
+    },
+  });
 });
 
 router.post('/fetchPrescription',(req,res)=>{
@@ -180,7 +199,6 @@ productHelpers.prescribedDrugs(req.body).then((status)=>{
 router.post('/paymentPrescription',(req,res)=>{
   let total = req.body.amount;
   let orderId = req.session.sub;
-  console.log('immmmmmmmmmmmmmmmmmmmmmmmm herrrrrrrrrrrrrrrrrrrrrr');
   productHelpers.generateRazorpay(orderId,total).then((response)=>{
     console.log("-----------",response)
     res.json({status:true,response})
@@ -297,23 +315,54 @@ router.get("/fetchDoctors/:clinicName/:whatsapp",
    }
 );
 
-router.get("/bookings/:doctorName/:department/:newName/:name/:address/:panchayath/:whatsapp",
+router.get("/bookings/:doctorName/:contact/:department/:newName/:name/:address/:panchayath/:whatsapp",
    async function (req, res, next) {
-     console.log('#@#@#@#@#@##@@#@##', req.params)
-      var todayDate = new Date().toISOString().slice(0, 10);
+      var today = new Date();
+      var dd = String(today.getDate()).padStart(2, '0');
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var yyyy = today.getFullYear();
+      
+      todayDate = yyyy + '-' + mm + '-' + dd
+
       const dubbleZero = parseInt("00");
       const time = new Date();
       const bookingTime = `${dubbleZero + time.getHours()}:${dubbleZero + time.getMinutes()
          }:${dubbleZero + time.getSeconds()}`;
-      req.params.token = "Notify after booking";
-      req.params.bookingDate = todayDate;
-      req.params.bookingTime = bookingTime;
-      req.params.consultingTime = "Notify after payment";
-      req.params.status = "Not-Confirmed";
-      req.session.bookedClinic = req.params.newName
-      
-      await userHelper.bookings(req.params, req.session.cogUserId).then((data) => {
-         res.render("paymentPageForBooking", { data });
+         timeOfDay = bookingTime
+         if (timeOfDay <= '18:00')
+           {
+               console.log('*************************************** Inside time frame')
+               req.params.token = "Notify after booking";
+               req.params.bookingDate = todayDate;
+               req.params.postponed = 0;
+               req.params.bookingTime = bookingTime;
+               req.params.consultingTime = "Notify after payment";
+               req.params.status = "Not-Confirmed";
+               req.session.bookedClinic = req.params.newName
+           }
+          else 
+           {    
+               console.log('++++++++++++++++++++++++++++++++++Your booking postponed to tommarrow morning')
+                const tomorrow = (long = false) => {
+                  let t = new Date();
+                  t.setDate(t.getDate() + 1);
+                  const ret = `${t.getFullYear()}-${String(t.getMonth() + 1).padStart(2, '0')}-${String(
+                    t.getDate()
+                  ).padStart(2, '0')}`;
+                  return !long ? ret : `${ret}T00:00:00`;
+                };
+
+                req.params.token = "Notify after booking";
+                req.params.bookingDate = tomorrow();
+                req.params.postponed = 0;
+                req.params.bookingTime = bookingTime;
+                req.params.consultingTime = "Notify after payment";
+                req.params.status = "Not-Confirmed";
+                req.session.bookedClinic = req.params.newName
+
+           }      
+                await userHelper.bookings(req.params, req.session.cogUserId).then((data) => {
+                  res.render("paymentPageForBooking", { data });
       });
    }
 );
@@ -325,7 +374,6 @@ router.get('/paymentSuccessful',(req,res)=>{
     // bcs status coming like array
     res.redirect("/login");
   })
-
 })
 
 router.post('/payment',(req,res)=>{

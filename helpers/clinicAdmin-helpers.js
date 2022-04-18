@@ -302,9 +302,16 @@ module.exports = {
   prescripedMedicine:(date)=>{
     return new Promise((res,rej)=>{
       try {       
-        db.get().collection('bigOprescription').find({date:date, status:'Paid'}).toArray().then((result)=>{
-         
-          res(result)
+        db.get().collection('bigOprescription').find({date:date, status:'Paid'}).toArray().then(async(result)=>{
+          console.log('&&&&&&&&&&&&&&&&&&&&&&&&&', result);
+          var myPostponed = await db.get().collection("bigOUserBookingDetails").find(( { postponed: { $gt: 0 }})).toArray()
+          if(myPostponed.length>0){
+               myPostponed = true
+          res({myPostponed, result})
+          }else{
+             myPostponed = false
+            res({myPostponed, result})
+          }
         })
       } catch (error) {
         res(err)

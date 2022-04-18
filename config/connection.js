@@ -3,7 +3,7 @@ const state={
     db:null
 }
 module.exports.connect=function(done){
-    const url = 'mongodb://localhost:27017'
+    const url = 'mongodb+srv://bigoAtlas:W5QMMf2WtSU23XGD@bigo.tpoon.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'
     const dbname ='bigOproject'
     MongoClient.connect(url,(err, data)=>{
         state.db=data.db(dbname)

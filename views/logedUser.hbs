@@ -531,7 +531,14 @@ border: 1px solid rgba(255, 255, 255, 0.336)  !important; border: 1px solid rgba
     </div>
   </div>
 </div>
-
+{{#if myBooking}}
+<div class="container mt-3" style="width:355px; position: fixed; bottom: 60; right: 15px; z-index: 9;">
+  <div class="alert alert-danger alert-dismissible">
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <strong>Sorry!</strong> Your booking postponed to<button class="btn btn-danger" style="margin-left:95px; margin-top:12px"> {{this.specificDate}}.</button>
+  </div>
+</div>
+{{/if}}
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script>
     AOS.init();
@@ -790,7 +797,7 @@ var cBooking = document.getElementById("bbkTimewithoutDate").value
             let seconds = time % 60
             seconds = seconds < 10 ? '0' + seconds : seconds
 
-            if(minutes == 00 && seconds == 00){
+            if(minutes == 00 && seconds == 00 && minutes == 0 && seconds == 0){
                 countdownEl.innerHTML= `<h3> &nbsp;&nbsp; Please Join<br> &nbsp;&nbsp; Vedeo Chat</h3>`
                 document.getElementById('live').style.display='block'
                     var x = document.getElementById("myAudio");
@@ -880,8 +887,6 @@ var cognitoId = document.getElementById('cognitoId').value
 <script>
 
     function payment1(amount){
-        alert('amount')
-        alert(amount)
          $.ajax({
              
             url:'/paymentPrescription',
@@ -957,7 +962,6 @@ var cognitoId = document.getElementById('cognitoId').value
     <script>
 
     function payment(fees,contact,bookingTime){
-        alert(fees)
          $.ajax({
             url:'/payment',
             data:{

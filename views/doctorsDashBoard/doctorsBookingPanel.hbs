@@ -9,7 +9,6 @@
     }
 </style>
 
-
 <table width="100%">
     <tr>
         <td width="50%" valign="top">
@@ -20,6 +19,23 @@
 
         <td width="50%" valign="top" style="padding: 8px;">
             <h4>{{data.doctorName}} {{data.degreee}} {{data.department}}</h4>
+                <div class="input-group">
+                    <form method="post" action="/doctorsDashBoard/recordingAbsent">
+                    <select name="absentDays" class="form-control" style="max-width: 100px !important">
+                        <option>0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>  
+                    
+                          <input name="contact" type="text" value="{{data.contact}}" hidden> 
+                    <span class="input-group-btn">
+                        <input class="btn btn-danger" value="Absent" type="submit" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px">
+                    </span>
+                    </form>   
+                    </div>
             <hr>
             {{#each bookingData}}
             {{!-- <form id="form" method="post" action="/doctorsDashBoard/addPrescription"></form> --}}
@@ -28,6 +44,7 @@
                 <span><font size="2">Consultaion - {{this.consultingTime}}</font></span>
                 <input id="cognitoId" type="text" value="{{this.cognitoId}}" hidden>
                 <input id="name" type="text" value="{{this.name}}" hidden>
+                
             </a>
             {{/each}}
         </td>

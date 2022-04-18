@@ -39,9 +39,13 @@
                     <th align="left">action</th>
                     
                 </tr>
-               {{#each fetchedPrescription}}
+               {{#each result}}
                 <tr>
+                    {{#if ../myPostponed}}
+                    <td><span style="background-color: red; color:white; padding:2px">{{this.drName}}</span></td>
+                    {{else}}
                     <td>{{this.drName}}</td>
+                    {{/if}}
                     <td>{{this.drDept}}</td>
                     <td>{{this.patient}}</td>
                     <td>{{this.whatsapp}}</td>
