@@ -4,7 +4,8 @@
   "private": true,
   "type": "commonjs",
   "scripts": {
-    "start": "nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "start:dev":"nodemon ./bin/www",
     "dev": "nodemon ./bin/www -e hbs,js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install"
   },
