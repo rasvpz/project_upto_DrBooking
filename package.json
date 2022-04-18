@@ -2,6 +2,7 @@
   "name": "projectpractice",
   "version": "0.0.0",
   "private": true,
+  "main": "./bin/www",
   "type": "commonjs",
   "scripts": {
     "start": "node ./bin/www",
