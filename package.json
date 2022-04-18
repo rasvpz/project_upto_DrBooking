@@ -2,9 +2,11 @@
   "name": "projectpractice",
   "version": "0.0.0",
   "private": true,
+  "type": "commonjs",
   "scripts": {
     "start": "nodemon ./bin/www", 
-    "dev": "nodemon ./bin/www -e hbs,js"
+    "dev": "nodemon ./bin/www -e hbs,js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install"
 
   },
   "dependencies": {
